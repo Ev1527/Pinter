@@ -34,6 +34,7 @@ function App(): JSX.Element {
           <Link to={'about'}>about</Link>
           <Link to={'main'}>main</Link>
           <Link to={'room'}>room</Link>
+          <Link to={'map'}>map</Link>
         </div>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
