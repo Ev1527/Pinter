@@ -1,15 +1,13 @@
-// RoomPage.js
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import ChatPage from './ChatPage'; // Импортируем ChatPage
+import ChatPage from './ChatPage';
 
 const RoomPage: FC = () => {
-  const { roomId } = useParams<{ roomId: string }>();
+  const { roomId } = useParams<{ roomId: string | undefined }>();
 
   return (
     <div>
       <h2>Room: {roomId}</h2>
-      {/* Передаем roomId в ChatPage */}
       <ChatPage roomId={roomId} />
     </div>
   );

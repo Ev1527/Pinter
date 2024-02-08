@@ -1,51 +1,7 @@
-// import React, { FC, useEffect, useState } from 'react';
-
-// export type ChatMessageType = {
-//   message: string;
-//   photo: string;
-//   userId: number;
-//   userName: string;
-// };
-
-// const ChatPage: FC = () => {
-//   return (
-//     <div>
-//       <Chat />
-//     </div>
-//   );
-// };
-
-// const Chat: FC = () => {
-//   const [wsChannel, setWsChannel] = useState<WebSocket | null>(null);
-
-//   useEffect(() => {
-//     //это все замыкание
-//     let ws: WebSocket;
-//     const closeHandler = () => {
-//       console.log('CLOSE WS');
-//       setTimeout(createChannel, 3000);
-//     };
-
-//     function createChannel() {
-//       ws?.removeEventListener('close', closeHandler);
-//       ws?.close();
-
-//       ws = new WebSocket('ws://localhost:8000');
-//       ws?.addEventListener('close', closeHandler);
-//       setWsChannel(ws);
-//     }
-//     createChannel();
-
-//     return () => {
-//       ws.removeEventListener('close', closeHandler);
-//       ws.close();
-//     };
-//   }, []);
-
 import React, { FC, useEffect, useState } from 'react';
 
 interface ChatPageProps {
-  roomId: string; // Принимаем roomId как пропс
+  roomId: string | undefined;
 }
 
 export type ChatMessageType = {
@@ -103,7 +59,7 @@ const Messages: FC<{ wsChannel: WebSocket | null }> = ({ wsChannel }) => {
         } else {
           console.error('Invalid message format. Expected an array.');
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error parsing message:', error.message);
       }
     };
@@ -159,8 +115,6 @@ const AddMessageForm: FC<{ wsChannel: WebSocket | null }> = ({ wsChannel }) => {
 
     const messageObject = {
       message: message,
-      //email: email,
-      // Add other properties if needed
     };
 
     wsChannel?.send(JSON.stringify(messageObject));
