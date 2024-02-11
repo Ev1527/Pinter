@@ -26,7 +26,7 @@ export const authorizationAxios = async (
 };
 
 export const checkAuthAxios = async (): Promise<User> => {
-  const { data }: { data: User } = await axios.get('/api/auth/check');
+  const { data }: { data: { user: User } } = await axios.get('/api/auth/check');
   return data.user;
 };
 

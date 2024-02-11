@@ -79,6 +79,11 @@ router.post("/sign-in", async (req, res) => {
   }
 });
 
+router.get('/test', (req, res) => {
+  res.json({message: 'HOROSHO'})
+  res.end()
+})
+
 router.get("/logout", (req, res) => {
   const { access } = req.cookies;
 
