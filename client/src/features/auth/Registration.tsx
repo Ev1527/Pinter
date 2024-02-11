@@ -6,13 +6,23 @@ import { useNavigate } from "react-router-dom";
 export default function Registration(): JSX.Element {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState<string | undefined>("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const onHandleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    void dispatch(registration({ name, email, password }));
-    navigate("/");
+    dispatch(registration({ name, email, password }))
+      .then((data) => {
+        if ("error" in data) {
+          setError(data.error.message);
+          return;
+        }
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div>
@@ -59,6 +69,11 @@ export default function Registration(): JSX.Element {
           Submit
         </button>
       </form>
+      {error && (
+        <div className="fail" style={{ color: "red" }}>
+          {error}
+        </div>
+      )}
     </div>
   );
 }

@@ -4,16 +4,18 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Party extends Model {
-    
-    static associate({Room}) {
-      this.hasMany(Room, {foreignKey: 'party_id'});
+
+    static associate({Group_Member}) {
+      this.hasMany(Group_Member, {foreignKey: 'party_id'});
     }
   }
   Party.init({
+    category: DataTypes.STRING,
     title: DataTypes.STRING,
     description: DataTypes.STRING,
+    image: DataTypes.TEXT,
     date: DataTypes.STRING,
-    category: DataTypes.STRING
+    time: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Party',

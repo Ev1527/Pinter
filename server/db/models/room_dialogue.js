@@ -3,24 +3,25 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Test extends Model {
+  class Room_Dialogue extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({Room_Dialogue}) {
-      this.belongsTo(Room_Dialogue, {foreignKey: 'room_dialogue_id'});
+    static associate({Group_Member, Message, Test}) {
+      this.hasMany(Group_Member, {foreignKey: 'room_dialogue_id'});
+      this.hasMany(Message, {foreignKey: 'room_dialogue_id'});
+      this.hasOne(Test, {foreignKey: 'room_dialogue_id'});
       // define association here
     }
   }
-  Test.init({
+  Room_Dialogue.init({
     title: DataTypes.STRING,
-    qa: DataTypes.TEXT,
-    room_dialogue_id: DataTypes.INTEGER
+    token: DataTypes.TEXT
   }, {
     sequelize,
-    modelName: 'Test',
+    modelName: 'Room_Dialogue',
   });
-  return Test;
+  return Room_Dialogue;
 };

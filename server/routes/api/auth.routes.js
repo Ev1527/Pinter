@@ -6,18 +6,18 @@ const cookiesConfig = require("../../config/cookiesConfig");
 
 router.post("/sign-up", async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password } = req.body.data;
     let userInDb = await User.findOne({ where: { email } });
     if (!name || !email || !password) {
       res.json({ message: "Заполните все поля" });
       return;
     }
     if (userInDb) {
-      res.json({ message: "Такой емайл уже занят" });
+      res.json({ message: "Такой емейл уже занят" });
       return;
     }
     const hash = await bcrypt.hash(password, 10);
-    userInDb = await User.create({ name, email, password: hash });
+    userInDb = await User.create({ name, email, password: hash, mode: "user" });
 
     if (userInDb) {
       const { accessToken, refreshToken } = generateTokens({
@@ -45,7 +45,6 @@ router.post("/sign-up", async (req, res) => {
 router.post("/sign-in", async (req, res) => {
   try {
     const { email, password } = req.body.data;
-
     const userInDb = await User.findOne({ where: { email } });
     if (!userInDb) {
       res.json({ message: "Такого юзера не существует или пароль неверный" });
@@ -88,7 +87,7 @@ router.get("/logout", (req, res) => {
     res
       .clearCookie(cookiesConfig.refresh)
       .clearCookie(cookiesConfig.access)
-      .json({ message: "success" })
+      .json({ message: "success" });
   }
 });
 

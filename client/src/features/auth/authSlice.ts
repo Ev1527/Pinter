@@ -36,31 +36,31 @@ const authSlice = createSlice({
       .addCase(registration.fulfilled, (state, action) => {
         state.user = action.payload;
       })
-      .addCase(registration.rejected, (state, action) => {
-        state.error = action.error.message;
-      })
+      // .addCase(registration.rejected, (state, action) => {
+      //   state.error = action.error.message;
+      // })
       .addCase(authorization.fulfilled, (state, action) => {
         state.user = action.payload;
       })
-      .addCase(authorization.rejected, (state, action) => {
-        state.error = action.error.message;
-      })
+      // .addCase(authorization.rejected, (state, action) => {
+      //   state.error = action.error.message;
+      // })
       // .addCase(checkAuth.pending, (state) => {
-      //   state.pending = true;
+      //   state.pending = false;
       // })
       .addCase(checkAuth.fulfilled, (state, action) => {
         state.pending = false;
         state.user = action.payload;
       })
-      .addCase(checkAuth.rejected, (state, action) => {
-        state.error = action.error.message;
-      })
+      // .addCase(checkAuth.rejected, (state, action) => {
+      //   state.error = action.error.message;
+      // })
       .addCase(logOut.fulfilled, (state) => {
         state.user = undefined;
-      })
-      .addCase(logOut.rejected, (state, action) => {
-        state.error = action.error.message;
       });
+    // .addCase(logOut.rejected, (state, action) => {
+    //   state.error = action.error.message;
+    // });
   },
 });
 export default authSlice.reducer;

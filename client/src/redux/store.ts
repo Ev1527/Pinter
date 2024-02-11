@@ -1,10 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { useDispatch, useSelector } from "react-redux";
-import authSlice from "../features/auth/authSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import { useDispatch, useSelector } from 'react-redux';
+import authSlice from '../features/auth/authSlice';
+import roomSlice from '../features/parties/components/roomSlice';
 
 const store = configureStore({
   reducer: {
     auth: authSlice,
+    party: roomSlice,
   },
 });
 

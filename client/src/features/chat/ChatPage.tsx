@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 
 // Интерфейс для пропсов компонента ChatPage
 interface ChatPageProps {
-  roomId: string | undefined;
+  partyId: string;
 }
 
 // Тип сообщения в чате
@@ -14,7 +14,7 @@ export type ChatMessageType = {
 };
 
 // Компонент ChatPage
-const ChatPage: FC<ChatPageProps> = ({ roomId }) => {
+const ChatPage: FC<ChatPageProps> = ({ partyId }) => {
   // Состояние для хранения WebSocket-канала
   const [wsChannel, setWsChannel] = useState<WebSocket | null>(null);
 
@@ -36,7 +36,7 @@ const ChatPage: FC<ChatPageProps> = ({ roomId }) => {
       ws?.close();
 
       // Используем roomId для создания уникального WebSocket-пути
-      ws = new WebSocket(`ws://localhost:8000/chat/${roomId}`);
+      ws = new WebSocket(`ws://localhost:8000/chat/${partyId}`);
       // Добавляем обработчик закрытия
       ws?.addEventListener('close', closeHandler);
       // Устанавливаем WebSocket-канал в состояние
@@ -51,7 +51,7 @@ const ChatPage: FC<ChatPageProps> = ({ roomId }) => {
       ws.removeEventListener('close', closeHandler);
       ws.close();
     };
-  }, [roomId]);
+  }, [partyId]);
 
   // Возвращаем JSX-разметку компонента ChatPage
   return (

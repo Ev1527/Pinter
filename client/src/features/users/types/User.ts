@@ -2,8 +2,7 @@ export type User = {
   id: number;
   name: string;
   email: string;
-  isAdmin: boolean;
+  message?: string;
 };
 
 export type UserId = User["id"];
-
