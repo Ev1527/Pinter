@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { parties, PartyType } from './parties';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -67,7 +67,7 @@ const PartyItem: FC = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rooms, setRooms] = useState<string[]>([]); // Состояние для хранения созданных комнат
-  const [createdRooms, setCreatedRooms] = useState<string[]>([]);
+  // const [createdRooms, setCreatedRooms] = useState<string[]>([]);
 
   const party = getPartyById(parties, partyId);
 
