@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useParams } from 'react-router-dom';
 import Navigation from '../features/navigation/Navigation';
 import Error from '../features/404/Error';
 import Registration from '../features/auth/Registration';
@@ -29,7 +29,7 @@ function App(): JSX.Element {
           <Route path='/about' element={<About />} />
           <Route path='/parties' element={<Party />} />
           <Route path='/parties/:id' element={<PartyItem />} />
-          <Route path='/chat/:partyId/*' element={<ChatPage />} />
+          <Route path='/chat/:partyId/*' element={<ChatPageWrapper />} />
           <Route path='/auth/registration' element={<Registration />} />
           <Route path='/auth/authorization' element={<Authorization />} />
         </Route>
@@ -38,5 +38,17 @@ function App(): JSX.Element {
     </div>
   );
 }
+
+const ChatPageWrapper: React.FC = () => {
+  const { partyId } = useParams();
+
+  // Если partyId не существует, перенаправляем на страницу ошибки или другую страницу
+  if (!partyId) {
+    return <Navigate to="/error" />;
+  }
+  
+  return <ChatPage partyId={partyId} />;
+};
+
 
 export default App;
