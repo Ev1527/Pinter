@@ -104,11 +104,16 @@
 
 
 const WebSocket = require('ws');
-const http = require('http');
+const https = require('https');
+const fs = require('fs')
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('WebSocket сервер запущен');
+// const server = https.createServer((req, res) => {
+//    res.writeHead(200, { 'Content-Type': 'text/plain' });
+//    res.end('WebSocket сервер запущен');
+// });
+const server = https.createServer({
+  cert: fs.readFileSync('/etc/letsencrypt/live/pinter.fun/fullchain.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/pinter.fun/privkey.pem'),
 });
 
 const wss = new WebSocket.Server({ server });
