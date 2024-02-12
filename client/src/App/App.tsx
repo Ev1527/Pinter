@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
-import { Navigate, Route, Routes, useParams } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Navigation from '../features/navigation/Navigation';
 import Error from '../features/404/Error';
 import Registration from '../features/auth/Registration';
