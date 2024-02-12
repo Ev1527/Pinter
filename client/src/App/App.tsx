@@ -11,7 +11,7 @@ import { checkAuth } from '../features/auth/authSlice';
 import About from '../features/about/components/About';
 import Party from '../features/parties/components/Party';
 import PartyItem from '../features/parties/components/PartyItem';
-import ChatPage from '../features/chat/ChatPage';
+// import ChatPage from '../features/chat/ChatPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -29,7 +29,7 @@ function App(): JSX.Element {
           <Route path='/about' element={<About />} />
           <Route path='/parties' element={<Party />} />
           <Route path='/parties/:id' element={<PartyItem />} />
-          <Route path='/chat/:partyId/*' element={<ChatPageWrapper />} />
+          {/* <Route path='/chat/:partyId/*' element={<ChatPageWrapper />} /> */}
           <Route path='/auth/registration' element={<Registration />} />
           <Route path='/auth/authorization' element={<Authorization />} />
         </Route>
@@ -39,16 +39,16 @@ function App(): JSX.Element {
   );
 }
 
-const ChatPageWrapper: React.FC = () => {
-  const { partyId } = useParams();
+// const ChatPageWrapper: React.FC = () => {
+//   const { partyId } = useParams();
 
-  // Если partyId не существует, перенаправляем на страницу ошибки или другую страницу
-  if (!partyId) {
-    return <Navigate to="/error" />;
-  }
+//   // Если partyId не существует, перенаправляем на страницу ошибки или другую страницу
+//   if (!partyId) {
+//     return <Navigate to="/error" />;
+//   }
   
-  return <ChatPage partyId={partyId} />;
-};
+//   return <ChatPage partyId={partyId} />;
+// };
 
 
 export default App;
