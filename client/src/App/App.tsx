@@ -8,12 +8,16 @@ import Registration from '../components/auth/Registration';
 import Authorization from '../components/auth/Authorization';
 import { useAppDispatch } from '../redux/store';
 import { checkAuth } from '../components/auth/authSlice';
-import About from '../components/about/About';
+import MainPage from '../components/main/MainPage';
+import PartiesList from '../components/party/PartiesList';
+import Map from '../components/map/Map';
+import UserProfile from '../components/profile/UserProfile';
+import PartyPage from '../components/party/PartyPage';
 import { loadParties } from '../components/party/partySlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
-  axios.defaults.baseURL = 'https://pinter.fun';
+  axios.defaults.baseURL = 'http://localhost:3001';
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
@@ -22,17 +26,18 @@ function App(): JSX.Element {
   }, [dispatch]);
 
   return (
-    <div>
-      <Routes>
-        <Route path='/' element={<Navigation />}>
-          <Route path='/about' element={<About />} />
-          <Route path='/parties' element={<Party />} />
-          <Route path='/auth/registration' element={<Registration />} />
-          <Route path='/auth/authorization' element={<Authorization />} />
-        </Route>
-        <Route path='*' element={<Error />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path='/' element={<Navigation />}>
+        <Route path='/auth/registration' element={<Registration />} />
+        <Route path='/auth/authorization' element={<Authorization />} />
+        <Route path='/main' element={<MainPage />} />
+        <Route path='/parties' element={<PartiesList />} />
+        <Route path='/contacts' element={<Map />} />
+        <Route path='/profile' element={<UserProfile />} />
+        <Route path='/parties/:partyId' element={<PartyPage />} />
+      </Route>
+      <Route path='*' element={<Error />} />
+    </Routes>
   );
 }
 
