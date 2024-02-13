@@ -9,13 +9,14 @@ import Authorization from '../features/auth/Authorization';
 import { useAppDispatch } from '../redux/store';
 import { checkAuth } from '../features/auth/authSlice';
 import About from '../features/about/components/About';
+import ChatPage from '../features/chat/ChatPage';
 import Party from '../features/parties/components/Party';
 import PartyItem from '../features/parties/components/PartyItem';
-import ChatPage from '../features/chat/ChatPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
-  axios.defaults.baseURL = 'https://pinter.fun';
+  axios.defaults.baseURL = 'https://localhost:4000';
+  // 'https://pinter.fun';
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
@@ -29,7 +30,7 @@ function App(): JSX.Element {
           <Route path='/about' element={<About />} />
           <Route path='/parties' element={<Party />} />
           <Route path='/parties/:id' element={<PartyItem />} />
-          <Route path='/chat/:partyId/*' element={<ChatPage />} />
+          <Route path='/chat' element={<ChatPage />} />
           <Route path='/auth/registration' element={<Registration />} />
           <Route path='/auth/authorization' element={<Authorization />} />
         </Route>
