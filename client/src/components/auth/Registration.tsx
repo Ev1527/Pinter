@@ -2,20 +2,34 @@ import React, { useState } from "react";
 import { useAppDispatch } from "../../redux/store";
 import { registration } from "./authSlice";
 import { useNavigate } from "react-router-dom";
-import styles from './styles/Auth.module.scss';
+import styles from "./styles/Auth.module.scss";
 
 export default function Registration(): JSX.Element {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
+  const [error, setError] = useState<string | undefined>("");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const onHandleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    void dispatch(registration({ name, email, password, cpassword }));
-    navigate("/");
+    dispatch(registration({ name, email, password }))
+      .then(
+        (data: {
+          error: { message: React.SetStateAction<string | undefined> };
+        }) => {
+          if ("error" in data) {
+            setError(data.error.message);
+            return;
+          }
+          navigate("/");
+        },
+      )
+      .catch((error: any) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -58,10 +72,12 @@ export default function Registration(): JSX.Element {
             placeholder="Повторите пароль"
           />
         </div>
-        {/* <h2 style={{ color: "red" }} className="error" /> */}
-        <button type="submit">
-          Сохранить
-        </button>
+        {error && (
+          <div className="fail" style={{ color: "red" }}>
+            {error}
+          </div>
+        )}
+        <button type="submit">Сохранить</button>
       </form>
     </div>
   );

@@ -5,7 +5,6 @@ import * as api from "../../App/api";
 const initialState: AuthState = {
   user: undefined,
   error: undefined,
-  pending: false,
 };
 
 export const registration = createAsyncThunk(
@@ -36,30 +35,14 @@ const authSlice = createSlice({
       .addCase(registration.fulfilled, (state, action) => {
         state.user = action.payload;
       })
-      .addCase(registration.rejected, (state, action) => {
-        state.error = action.error.message;
-      })
       .addCase(authorization.fulfilled, (state, action) => {
         state.user = action.payload;
       })
-      .addCase(authorization.rejected, (state, action) => {
-        state.error = action.error.message;
-      })
-      .addCase(checkAuth.pending, (state) => {
-        state.pending = true;
-      })
       .addCase(checkAuth.fulfilled, (state, action) => {
-        state.pending = false;
         state.user = action.payload;
-      })
-      .addCase(checkAuth.rejected, (state, action) => {
-        state.error = action.error.message;
       })
       .addCase(logOut.fulfilled, (state) => {
         state.user = undefined;
-      })
-      .addCase(logOut.rejected, (state, action) => {
-        state.error = action.error.message;
       });
   },
 });

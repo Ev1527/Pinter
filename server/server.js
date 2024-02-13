@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const serverConfig = require("./config/server.config");
+const serverConfig = require("./config/serverConfig");
 const PORT = process.env.PORT || 3001;
 
 const indexRouter = require('./routes/index.routes')

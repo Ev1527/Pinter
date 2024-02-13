@@ -3,18 +3,28 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/store";
 import { authorization } from "./authSlice";
-import styles from './styles/Auth.module.scss'
+import styles from "./styles/Auth.module.scss";
 
 export default function Authorization(): JSX.Element {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate()
+  const [error, setError] = useState<string | undefined>("");
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  
+
   const onHandleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    void dispatch(authorization({ email, password }));
-    navigate('/')
+    dispatch(authorization({ email, password }))
+      .then((data) => {
+        if ("error" in data) {
+          setError(data.error.message);
+          return;
+        }
+        navigate("/main");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -42,10 +52,12 @@ export default function Authorization(): JSX.Element {
             placeholder="Введите пароль"
           />
         </div>
-        {/* <h2 style={{ color: "red" }} className="error" /> */}
-        <button type="submit">
-          Войти
-        </button>
+        {error && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        )}
+        <button type="submit">Войти</button>
       </form>
     </div>
   );

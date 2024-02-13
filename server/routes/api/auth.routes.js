@@ -1,71 +1,133 @@
 const router = require("express").Router();
-const { User } = require("../../db/models");
 const bcrypt = require("bcrypt");
-router.post("/registration", async (req, res) => {
+const { User } = require("../../db/models");
+const generateTokens = require("../../utils/authUtils");
+const cookiesConfig = require("../../config/cookiesConfig");
+
+router.post("/sign-up", async (req, res) => {
   try {
-    const { name, email, password, cpassword } = req.body.data;
-    let user = await User.findOne({ where: { email } });
-    if (!name || !email || !password || !cpassword) {
-      res.json({ message: "Все поля должны быть заполнены" });
-      return; //если делаем в столбик
+    const { name, email, password } = req.body.data;
+    let userInDb = await User.findOne({ where: { email } });
+    if (!name || !email || !password) {
+      res.json({ message: "Заполните все поля" });
+      return;
     }
-    if (user) {
-      res.json({ message: "Пользователь с таким email уже существует" });
-      return; //если делаем в столбик
-    }
-    if (password !== cpassword) {
-      res.json({ message: "Пароли не совпадают" });
-      return; //если делаем в столбик
+    if (userInDb) {
+      res.json({ message: "Такой емейл уже занят" });
+      return;
     }
     const hash = await bcrypt.hash(password, 10);
-    user = await User.create({ name, email, password: hash });
-    req.session.userId = user.id;
-    res.json(user);
-  } catch (message) {
-    res.json(message);
+    userInDb = await User.create({ name, email, password: hash, mode: "user" });
+
+    if (userInDb) {
+      const { accessToken, refreshToken } = generateTokens({
+        user: { id: userInDb.id, email: userInDb.email, name: userInDb.name },
+      });
+
+      res
+        .cookie(cookiesConfig.refresh, refreshToken, {
+          maxAge: cookiesConfig.maxAgeRefresh,
+          httpOnly: true,
+        })
+        .cookie(cookiesConfig.access, accessToken, {
+          maxAge: cookiesConfig.maxAgeAccess,
+          httpOnly: true,
+        })
+        .status(201)
+        .json(userInDb);
+      return;
+    }
+  } catch ({ message }) {
+    res.json({ message });
   }
 });
 
-router.post("/authorization", async (req, res) => {
+router.post("/sign-in", async (req, res) => {
   try {
     const { email, password } = req.body.data;
-    const user = await User.findOne({ where: { email: email } });
-    const compare = await bcrypt.compare(password, user.password);
+    const userInDb = await User.findOne({ where: { email } });
+    if (!userInDb) {
+      res.json({ message: "Такого юзера не существует или пароль неверный" });
+      return;
+    }
+    const compare = await bcrypt.compare(password, userInDb.password);
+    if (!compare) {
+      res.json({ message: "Такого юзера не существует или пароль неверный" });
+      return;
+    }
     if (!email || !password) {
-      res.json({ message: "Все поля должны быть заполнены" });
-      return; //если делаем в столбик
+      res.json({ message: "Заполните все поля" });
+      return;
     }
-    if (!user || !compare) {
-      res.json({
-        message: "Пользователя с таким email не существует или неверный пароль",
-      });
-      return; //если делаем в столбик
-    }
-    req.session.userId = user.id;
-    res.json(user);
-  } catch (message) {
-    res.json(message);
+    const { accessToken, refreshToken } = generateTokens({
+      user: { id: userInDb.id, email: userInDb.email, name: userInDb.name },
+    });
+
+    res
+      .cookie(cookiesConfig.refresh, refreshToken, {
+        maxAge: cookiesConfig.maxAgeRefresh,
+        httpOnly: true,
+      })
+      .cookie(cookiesConfig.access, accessToken, {
+        maxAge: cookiesConfig.maxAgeAccess,
+        httpOnly: true,
+      })
+      .status(201)
+      .json(userInDb);
+  } catch ({ message }) {
+    res.json({ message });
   }
 });
 
-router.post("/logout", (req, res) => {
-  req.session.destroy((error) => {
-    if (error) {
-      return res.status(500).json({ message: "Ошибка при удалении сессии" });
-    }
-    res.clearCookie("user_sid").end();
-  });
+router.get("/test", (req, res) => {
+  res.json({ message: "HOROSHO" });
+  res.end();
+});
+
+router.get("/logout", (req, res) => {
+  const { access } = req.cookies;
+
+  if (access) {
+    res.locals.user = {};
+    res
+      .clearCookie(cookiesConfig.refresh)
+      .clearCookie(cookiesConfig.access)
+      .json({ message: "success" });
+  }
 });
 
 router.get("/check", async (req, res) => {
-  try {
-    if (req.session.userId) {
-      const user = await User.findOne({ where: { id: req.session.userId } });
-      res.json(user);
+  if (res.locals.user) {
+    const { user } = res.locals;
+    const userInDb = await User.findOne({ where: { id: user?.id } });
+    if (user && userInDb) {
+      res.status(200).json({
+        user: { id: user.id, email: user.email, name: user.name },
+      });
+    } else {
+      res.status(400).json({ user: false });
     }
-    res.end();
+  }
+});
+
+router.get("/allusers", async (req, res) => {
+  try {
+    const users = await User.count();
+    res.json({ users });
   } catch ({ message }) {
-    res.json({ message });
+    console.log(message);
+  }
+});
+
+router.put("/changePhoto", async (req, res) => {
+  try {
+    const { data } = req.body;
+
+    await User.update({ image: data }, { where: { id: 7 } });
+    const user = await User.findOne({ where: { id: 7 } });
+    res.json(user);
+  } catch ({ message }) {
+    console.log(message);
   }
 });
 

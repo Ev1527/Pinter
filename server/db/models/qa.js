@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   QA.init({
-    answer: DataTypes.STRING,
-    question: DataTypes.STRING
+    question: DataTypes.TEXT,
+    answer: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'QA',

@@ -9,23 +9,21 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      answer: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
       question: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
+      },
+      answer: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: new Date()
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: new Date()
+        type: Sequelize.DATE
       }
     });
   },

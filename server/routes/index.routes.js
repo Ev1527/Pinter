@@ -1,7 +1,10 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const authApiRoute = require('./api/auth.routes.js')
+const authApiRouter = require("./api/auth.routes");
+const roomApiRouter = require("./api/room.routes");
 
-router.use('/api/auth', authApiRoute)
+router.use("/api/auth", authApiRouter);
+router.use("/api/room", roomApiRouter);
 
-module.exports = router
+
+module.exports = router;

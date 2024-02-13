@@ -1,13 +1,13 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 // import "./style/NavigationStyle.css";
-import styles from './style/Navigation.module.scss';
+import styles from "./style/Navigation.module.scss";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { logOut } from "../auth/authSlice";
 
 export default function Navigation(): JSX.Element {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { user } = useAppSelector((store) => store.auth);
+
   const dispatch = useAppDispatch();
 
   const onHandleLogout = (): void => {
@@ -41,7 +41,7 @@ export default function Navigation(): JSX.Element {
             </li>
           </div>
 
-          {!user ? (
+          {!user?.name ? (
             <div className={styles.lk}>
               <li className="nav__item lk">
                 <NavLink className="nav__button" to="/auth/registration">
@@ -57,6 +57,11 @@ export default function Navigation(): JSX.Element {
           ) : (
             <>
               <li>hello {user.name}</li>
+              <li className="nav__item lk">
+                <NavLink className="nav__button" to="/profile">
+                  Profile
+                </NavLink>
+              </li>
               <li className="nav__item">
                 <button
                   type="button"
