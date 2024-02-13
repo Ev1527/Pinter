@@ -12,28 +12,20 @@ const serverConfig = (app) => {
   //   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   //   res.status(200).send();
   // });
-
   app.use(express.json({ limit: '200mb' }));
   app.use(express.urlencoded({ limit: '200mb', extended: true }));
   app.use(express.text({ limit: '200mb' }));
-
   app.use(
     cors({
-      origin: 'https://pinter.fun',
+      origin: 'http://localhost:5173',
       credentials: true,
-      methods: 'GET, POST, OPTIONS',
-      allowedHeaders: 'Content-Type',
+      // methods: "GET, POST, OPTIONS",
+      // allowedHeaders: "Content-Type",
     })
   );
-
   // app.use(express.urlencoded({ extended: true }));
   // app.use(express.json());
   app.use(express.static(path.join(__dirname, '..', 'public')));
-
-  app.use(express.urlencoded({ extended: true }));
-  app.use(express.json());
-  app.use(express.static(path.join(__dirname, '..', 'public')));
-
   app.use(cookieParser());
   app.use(verifyAccessToken);
 };

@@ -17,7 +17,7 @@ import { loadParties } from '../components/party/partySlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
-  axios.defaults.baseURL = 'http://localhost:3001';
+  axios.defaults.baseURL = 'http://localhost:4000';
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
@@ -30,6 +30,7 @@ function App(): JSX.Element {
       <Route path='/' element={<Navigation />}>
         <Route path='/auth/registration' element={<Registration />} />
         <Route path='/auth/authorization' element={<Authorization />} />
+        <Route path='/chat' element={<Chat />} />
         <Route path='/main' element={<MainPage />} />
         <Route path='/parties' element={<PartiesList />} />
         <Route path='/contacts' element={<Map />} />
