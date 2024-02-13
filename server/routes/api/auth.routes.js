@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-const { User } = require("../../db/models");
+const { User, Party } = require("../../db/models");
 const generateTokens = require("../../utils/authUtils");
 const cookiesConfig = require("../../config/cookiesConfig");
 
@@ -62,7 +62,14 @@ router.post("/sign-in", async (req, res) => {
     const { accessToken, refreshToken } = generateTokens({
       user: { id: userInDb.id, email: userInDb.email, name: userInDb.name },
     });
-
+    // await Party.create({
+    //   category: "ресторан",
+    //   title: "Хачапури и вино",
+    //   description: "вкусно",
+    //   image: "https://www.arenahall.info/upload/iblock/387/mbpd193z3yp9plzqqhp3wl1txxgmk7tv.jpg",
+    //   date: "always",
+    //   time: "18:00"
+    // });
     res
       .cookie(cookiesConfig.refresh, refreshToken, {
         maxAge: cookiesConfig.maxAgeRefresh,
@@ -79,10 +86,10 @@ router.post("/sign-in", async (req, res) => {
   }
 });
 
-router.get('/test', (req, res) => {
-  res.json({message: 'HOROSHO'})
-  res.end()
-})
+router.get("/test", (req, res) => {
+  res.json({ message: "HOROSHO" });
+  res.end();
+});
 
 router.get("/logout", (req, res) => {
   const { access } = req.cookies;
@@ -107,6 +114,27 @@ router.get("/check", async (req, res) => {
     } else {
       res.status(400).json({ user: false });
     }
+  }
+});
+
+router.get("/allusers", async (req, res) => {
+  try {
+    const users = await User.count();
+    res.json({ users });
+  } catch ({ message }) {
+    console.log(message);
+  }
+});
+
+router.put("/changePhoto", async (req, res) => {
+  try {
+    const { data } = req.body;
+
+    await User.update({ image: data }, { where: { id: 7 } });
+    const user = await User.findOne({ where: { id: 7 } });
+    res.json(user);
+  } catch ({ message }) {
+    console.log(message);
   }
 });
 

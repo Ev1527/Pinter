@@ -1,0 +1,213 @@
+.parties__list {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .title {
+    width: 100%;
+    height: 310px;
+    display: flex;
+    flex-direction: column;
+    font-size: 135px;
+    // color: #DFE0E7;
+    font-weight: 800;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .where {
+    text-align: right;
+    margin-right: 100px;
+    margin-bottom: -20px;
+  }
+
+  .togo {
+    text-align: left;
+    color: #a8aab9;
+    margin-left: 100px;
+    background-color: transparent;
+  }
+
+  .filter__container {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+
+    p {
+      text-decoration: underline #7e7e7e;
+      text-underline-offset: 0.5em;
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      // background: transparent;
+      background: url("./Arr_select.png") no-repeat 175px center;
+      padding-right: 20px;
+      outline: none;
+      width: 200px;
+      height: 30px;
+      border-radius: 15px;
+      border: 1px solid #7e7e7e;
+      background-color: #303030;
+      font-size: 16px;
+      padding-left: 10px;
+    }
+  }
+
+  .party__item {
+    width: 260px;
+    height: 468px;
+
+    img {
+      width: 260px;
+      height: 370px;
+      cursor: pointer;
+    }
+
+    .description {
+      margin-top: 20px;
+      width: 260px;
+      height: 70px;
+      // height: 110px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+      font-size: 18px;
+      border-bottom: 1px solid #7e7e7e;
+
+      p {
+        font-size: 16px;
+        color: #7e7e7e;
+        margin-bottom: 15px;
+      }
+    }
+
+    h4 {
+      margin-top: 5px;
+      font-size: 16px;
+      text-align: left;
+      font-weight: 400;
+      color: #a8aab9;
+      cursor: pointer;
+    }
+  }
+}
+
+.party_page {
+  position: relative;
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: self-start;
+  gap: 50px;
+
+  &__info {
+    position: relative;
+    width: 655px;
+    height: 290px;
+    border: 1px solid #7e7e7e;
+    background-image: url("./event_img_example.png");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    button {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 180px;
+      height: 45px;
+      border: 1px solid white;
+      font-size: 16px;
+      font-weight: 400;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+
+      &:hover {
+        background-color: white;
+        color: black;
+        transition-duration: 0.5s;
+      }
+    }
+
+    .time_place {
+      background-color: transparent;
+      position: absolute;
+      left: 15px;
+      bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: start;
+    }
+
+    p {
+      background-color: transparent;
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+
+  .findYours {
+    position: absolute;
+    top: 0;
+    left: 60%;
+  }
+
+  .choose_room {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    gap: 50px;
+
+    h1 {
+      position: relative;
+      width: 90%;
+      display: block;
+      text-align: start;
+      font-size: 40px;
+      font-weight: 500;
+      margin-bottom: 5px;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 30;
+        bottom: 15px;
+        width: 100%;
+        height: 2px;
+        background-color: #7e7e7e;
+        margin-left: 20px;
+      }
+    }
+
+    .rooms__container {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      .item {
+        width: 300px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+  }
+}

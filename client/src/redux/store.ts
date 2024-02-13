@@ -1,11 +1,15 @@
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import authSlice from '../features/auth/authSlice';
+import authSlice from '../components/auth/authSlice';
+import partySlice from '../components/party/partySlice';
+import roomSlice from '../components/room/roomSlice';
 import chatSlice from '../features/chat/chatSlice';
 
 const store = configureStore({
   reducer: {
     auth: authSlice,
+    party: partySlice,
+    room: roomSlice,
     chat: chatSlice,
   },
 });

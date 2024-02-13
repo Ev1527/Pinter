@@ -13,9 +13,26 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
+      description: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      members: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       token: {
         allowNull: false,
         type: Sequelize.TEXT
+      },
+      party_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Parties',
+          key: 'id'
+        },
+        onDelete: 'cascade'
       },
       createdAt: {
         allowNull: false,

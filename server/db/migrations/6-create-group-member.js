@@ -27,15 +27,6 @@ module.exports = {
         },
         onDelete: 'cascade'
       },
-      party_id: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Parties',
-          key: 'id'
-        },
-        onDelete: 'cascade'
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

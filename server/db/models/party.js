@@ -5,8 +5,9 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Party extends Model {
 
-    static associate({Group_Member}) {
-      this.hasMany(Group_Member, {foreignKey: 'party_id'});
+    static associate({Room_Dialogue}) {
+      // this.hasMany(Group_Member, {foreignKey: 'party_id'});
+      this.hasMany(Room_Dialogue, {foreignKey: 'party_id'});
     }
   }
   Party.init({
