@@ -18,7 +18,8 @@ import ChatPage from '../components/chat/ChatPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
-  axios.defaults.baseURL = 'http://localhost:4000';
+  // axios.defaults.baseURL = "http://localhost:3001";
+  axios.defaults.baseURL = 'https://pinter.fun';
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
