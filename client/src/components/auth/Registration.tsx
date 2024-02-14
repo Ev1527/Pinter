@@ -15,11 +15,9 @@ export default function Registration(): JSX.Element {
 
   const onHandleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    dispatch(registration({ name, email, password }))
+    dispatch(registration({ name, email, password, cpassword }))
       .then(
-        (data: {
-          error: { message: React.SetStateAction<string | undefined> };
-        }) => {
+        (data) => {
           if ("error" in data) {
             setError(data.error.message);
             return;
@@ -31,6 +29,28 @@ export default function Registration(): JSX.Element {
         console.log(error);
       });
   };
+  // const onHandleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const resultAction = await dispatch(registration({ name, email, password, cpassword }));
+
+  //     if (registration.fulfilled.match(resultAction)) {
+  //       
+  //       navigate("/");
+  //     } else if (registration.rejected.match(resultAction)) {
+  //       
+  //       const payload = resultAction.payload;
+  //       if (payload && payload.error && payload.error.message) {
+  //         setError(payload.error.message);
+  //       } else {
+  //         setError("An unknown error occurred.");
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div className={styles.container}>
