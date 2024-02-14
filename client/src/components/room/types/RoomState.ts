@@ -1,4 +1,5 @@
 export type Room = {
+  [x: string]: any;
   id: number;
   title: string;
   description: string;
@@ -21,4 +22,11 @@ export type CreateRoomWithTest = {
   secondAnswer: string;
   thirdAnswer: string;
   partyId: string | undefined;
+};
+
+export type RoomTest = {
+  firstAnswer: string;
+  secondAnswer: string;
+  thirdAnswer: string;
+  roomId: number;
 };

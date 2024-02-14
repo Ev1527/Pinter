@@ -30,7 +30,6 @@ function App(): JSX.Element {
       <Route path='/' element={<Navigation />}>
         <Route path='/auth/registration' element={<Registration />} />
         <Route path='/auth/authorization' element={<Authorization />} />
-        <Route path='/chat' element={<Chat />} />
         <Route path='/main' element={<MainPage />} />
         <Route path='/parties' element={<PartiesList />} />
         <Route path='/contacts' element={<Map />} />

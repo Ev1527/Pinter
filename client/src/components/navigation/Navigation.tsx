@@ -20,7 +20,7 @@ export default function Navigation(): JSX.Element {
         <ul className={styles.menu}>
           <div className={styles.nav}>
             <li className={styles.item}>
-              <NavLink className='nav__button' to='/main'>
+              <NavLink className='nav__button' to='/'>
                 Главная
               </NavLink>
             </li>

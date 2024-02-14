@@ -20,7 +20,7 @@ export default function Authorization(): JSX.Element {
           setError(data.error.message);
           return;
         }
-        navigate("/main");
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);

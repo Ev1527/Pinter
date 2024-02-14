@@ -3,7 +3,6 @@ const {
   Room_Dialogue,
   Access_Table,
   Group_Member,
-  Party,
   Test,
 } = require("../../db/models");
 const { v4: uuidv4 } = require("uuid");
@@ -11,7 +10,11 @@ const { v4: uuidv4 } = require("uuid");
 router.get("/:partyId", async (req, res) => {
   try {
     const { partyId } = req.params;
-    const rooms = await Room_Dialogue.findAll({ where: { party_id: partyId } });
+    const rooms = await Room_Dialogue.findAll({
+      where: { party_id: partyId },
+      include: { model: Test },
+    });
+
     res.json(rooms);
   } catch ({ message }) {
     res.json(message);
@@ -48,7 +51,6 @@ router.post("/roomDialogue", async (req, res) => {
       },
     };
     const token = uuidv4();
-    console.log(token);
     // const party = await Party.findOne({ where: { id: partyId } });
     const room = await Room_Dialogue.create({
       title,
@@ -75,6 +77,24 @@ router.post("/roomDialogue", async (req, res) => {
     res.json(room);
   } catch ({ message }) {
     console.log(message);
+  }
+});
+
+router.post("/test", async (req, res) => {
+  try {
+    const { firstAnswer, secondAnswer, thirdAnswer, roomId } = req.body.data;
+    const test = await Test.findOne({ where: { room_dialogue_id: roomId } });
+    const { question1, question2, question3 } = JSON.parse(test.qa);
+    if (
+      firstAnswer === question1.answer &&
+      secondAnswer === question2.answer &&
+      thirdAnswer === question3.answer
+    ) {
+      return res.json({ message: "ok" });
+    }
+    res.json({ message: "пошел на хуй" });
+  } catch ({ message }) {
+    res.json(message);
   }
 });
 

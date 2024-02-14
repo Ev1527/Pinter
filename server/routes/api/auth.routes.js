@@ -1,23 +1,23 @@
-const router = require("express").Router();
-const bcrypt = require("bcrypt");
-const { User, Party } = require("../../db/models");
-const generateTokens = require("../../utils/authUtils");
-const cookiesConfig = require("../../config/cookiesConfig");
+const router = require('express').Router();
+const bcrypt = require('bcrypt');
+const { User, Party } = require('../../db/models');
+const generateTokens = require('../../utils/authUtils');
+const cookiesConfig = require('../../config/cookiesConfig');
 
-router.post("/sign-up", async (req, res) => {
+router.post('/sign-up', async (req, res) => {
   try {
     const { name, email, password } = req.body.data;
     let userInDb = await User.findOne({ where: { email } });
     if (!name || !email || !password) {
-      res.json({ message: "Заполните все поля" });
+      res.json({ message: 'Заполните все поля' });
       return;
     }
     if (userInDb) {
-      res.json({ message: "Такой емейл уже занят" });
+      res.json({ message: 'Такой емейл уже занят' });
       return;
     }
     const hash = await bcrypt.hash(password, 10);
-    userInDb = await User.create({ name, email, password: hash, mode: "user" });
+    userInDb = await User.create({ name, email, password: hash, mode: 'user' });
 
     if (userInDb) {
       const { accessToken, refreshToken } = generateTokens({
@@ -42,34 +42,35 @@ router.post("/sign-up", async (req, res) => {
   }
 });
 
-router.post("/sign-in", async (req, res) => {
+router.post('/sign-in', async (req, res) => {
   try {
     const { email, password } = req.body.data;
     const userInDb = await User.findOne({ where: { email } });
     if (!userInDb) {
-      res.json({ message: "Такого юзера не существует или пароль неверный" });
+      res.json({ message: 'Такого юзера не существует или пароль неверный' });
       return;
     }
     const compare = await bcrypt.compare(password, userInDb.password);
     if (!compare) {
-      res.json({ message: "Такого юзера не существует или пароль неверный" });
+      res.json({ message: 'Такого юзера не существует или пароль неверный' });
       return;
     }
     if (!email || !password) {
-      res.json({ message: "Заполните все поля" });
+      res.json({ message: 'Заполните все поля' });
       return;
     }
     const { accessToken, refreshToken } = generateTokens({
       user: { id: userInDb.id, email: userInDb.email, name: userInDb.name },
     });
-    // await Party.create({
-    //   category: "ресторан",
-    //   title: "Хачапури и вино",
-    //   description: "вкусно",
-    //   image: "https://www.arenahall.info/upload/iblock/387/mbpd193z3yp9plzqqhp3wl1txxgmk7tv.jpg",
-    //   date: "always",
-    //   time: "18:00"
-    // });
+    await Party.create({
+      category: 'ресторан',
+      title: 'Хачапури и вино',
+      description: 'вкусно',
+      image:
+        'https://www.arenahall.info/upload/iblock/387/mbpd193z3yp9plzqqhp3wl1txxgmk7tv.jpg',
+      date: 'always',
+      time: '18:00',
+    });
     res
       .cookie(cookiesConfig.refresh, refreshToken, {
         maxAge: cookiesConfig.maxAgeRefresh,
@@ -86,12 +87,12 @@ router.post("/sign-in", async (req, res) => {
   }
 });
 
-router.get("/test", (req, res) => {
-  res.json({ message: "HOROSHO" });
+router.get('/test', (req, res) => {
+  res.json({ message: 'HOROSHO' });
   res.end();
 });
 
-router.get("/logout", (req, res) => {
+router.get('/logout', (req, res) => {
   const { access } = req.cookies;
 
   if (access) {
@@ -99,11 +100,11 @@ router.get("/logout", (req, res) => {
     res
       .clearCookie(cookiesConfig.refresh)
       .clearCookie(cookiesConfig.access)
-      .json({ message: "success" });
+      .json({ message: 'success' });
   }
 });
 
-router.get("/check", async (req, res) => {
+router.get('/check', async (req, res) => {
   if (res.locals.user) {
     const { user } = res.locals;
     const userInDb = await User.findOne({ where: { id: user?.id } });
@@ -117,7 +118,7 @@ router.get("/check", async (req, res) => {
   }
 });
 
-router.get("/allusers", async (req, res) => {
+router.get('/allusers', async (req, res) => {
   try {
     const users = await User.count();
     res.json({ users });
@@ -126,7 +127,7 @@ router.get("/allusers", async (req, res) => {
   }
 });
 
-router.put("/changePhoto", async (req, res) => {
+router.put('/changePhoto', async (req, res) => {
   try {
     const { data } = req.body;
 

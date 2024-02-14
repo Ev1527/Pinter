@@ -8,6 +8,6 @@ const roomApiRouter = require('./api/room.routes');
 router.use('/api/auth', authApiRouter);
 router.use('/api/room', roomApiRouter);
 router.use('/api/party', partyApiRouter);
-router.use('/chat', chatRoutes);
+router.use('/api/chat', chatRoutes);
 
 module.exports = router;

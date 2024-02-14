@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
   class Message extends Model {
     static associate({ Room_Dialogue, User }) {
       this.belongsTo(Room_Dialogue, { foreignKey: 'room_dialogue_id' });
-      this.belongsTo(User, { foreignKey: 'userId' });
     }
   }
   Message.init(

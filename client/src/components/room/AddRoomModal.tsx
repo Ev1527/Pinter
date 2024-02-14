@@ -99,6 +99,7 @@ export default function AddRoomModal({
                 onChange={(e) => setFirstAnswer(e.target.value)}
                 value={firstAnswer}
               >
+                <option value="" disabled></option>
                 <option>Да</option>
                 <option>Нет</option>
               </select>
@@ -114,6 +115,7 @@ export default function AddRoomModal({
                 onChange={(e) => setSecondAnswer(e.target.value)}
                 value={secondAnswer}
               >
+                <option value="" disabled></option>
                 <option>Да</option>
                 <option>Нет</option>
               </select>
@@ -130,6 +132,7 @@ export default function AddRoomModal({
                 onChange={(e) => setThirdAnswer(e.target.value)}
                 value={thirdAnswer}
               >
+                <option value="" disabled></option>
                 <option>Да</option>
                 <option>Нет</option>
               </select>
