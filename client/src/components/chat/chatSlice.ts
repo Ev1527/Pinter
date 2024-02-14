@@ -51,10 +51,19 @@ export const { messagesReceived, statusChanged } = chatSlice.actions;
 export const startMessagesListening =
   (): ThunkAction<void, RootState, unknown, any> => (dispatch) => {
     chatAPI.start();
-    chatAPI.subscribe('messages-received', (messages: any) => {
-      dispatch(messagesReceived({ messages }));
-    });
+    // chatAPI.subscribe('messages-received', (messages: any) => {
+    //   dispatch(messagesReceived({ messages }));
+    // });
+    // chatAPI.subscribe('status-changed', (status: any) => {
+    //   dispatch(statusChanged({ status }));
+    // });
     chatAPI.subscribe('status-changed', (status: any) => {
+      if (status === 'ready') {
+        // Now that the WebSocket is open, subscribe to messages
+        chatAPI.subscribe('messages-received', (messages: any) => {
+          dispatch(messagesReceived({ messages }));
+        });
+      }
       dispatch(statusChanged({ status }));
     });
   };

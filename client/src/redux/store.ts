@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import authSlice from '../components/auth/authSlice';
 import partySlice from '../components/party/partySlice';
 import roomSlice from '../components/room/roomSlice';
-import chatSlice from '../features/chat/chatSlice';
+import chatSlice from '../components/chat/chatSlice';
 
 const store = configureStore({
   reducer: {

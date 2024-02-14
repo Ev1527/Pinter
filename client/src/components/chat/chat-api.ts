@@ -38,7 +38,7 @@ const notifySubscribersAboutStatus = (status: StatusType) => {
 function createChannel() {
   cleanUp();
   ws?.close();
-  ws = new WebSocket('ws://localhost:8000/?roomId=yourRoomId');
+  ws = new WebSocket('ws://localhost:4000/chat');
   notifySubscribersAboutStatus('pending');
   ws.addEventListener('close', closeHandler);
   ws.addEventListener('message', messageHandler);

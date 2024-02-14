@@ -14,6 +14,7 @@ import Map from '../components/map/Map';
 import UserProfile from '../components/profile/UserProfile';
 import PartyPage from '../components/party/PartyPage';
 import { loadParties } from '../components/party/partySlice';
+import ChatPage from '../components/chat/ChatPage';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -30,13 +31,14 @@ function App(): JSX.Element {
       <Route path='/' element={<Navigation />}>
         <Route path='/auth/registration' element={<Registration />} />
         <Route path='/auth/authorization' element={<Authorization />} />
-        <Route path='/main' element={<MainPage />} />
+        <Route path='/' element={<MainPage />} />
         <Route path='/parties' element={<PartiesList />} />
         <Route path='/contacts' element={<Map />} />
         <Route path='/profile' element={<UserProfile />} />
         <Route path='/parties/:partyId' element={<PartyPage />} />
       </Route>
       <Route path='*' element={<Error />} />
+      <Route path='/chat' element={<ChatPage />} />
     </Routes>
   );
 }
