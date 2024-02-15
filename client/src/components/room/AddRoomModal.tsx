@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import styles from "./styles/Room.module.scss";
-import { useAppDispatch } from "../../redux/store";
-import { addRoomWithTest } from "./roomSlice";
+import React, { useState } from 'react';
+import styles from './styles/Room.module.scss';
+import { useAppDispatch } from '../../redux/store';
+import { addRoomWithTest } from './roomSlice';
 
 export default function AddRoomModal({
   hide,
@@ -11,15 +11,15 @@ export default function AddRoomModal({
   partyId: string | undefined;
 }): JSX.Element {
   const [check, setCheck] = useState(true);
-  const [title, setTitle] = useState("");
-  const [members, setMembers] = useState("2");
-  const [description, setDescription] = useState("");
-  const [firstQuestion, setFirstQuestion] = useState("");
-  const [secondQuestion, setSecondQuestion] = useState("");
-  const [thirdQuestion, setThirdQuestion] = useState("");
-  const [firstAnswer, setFirstAnswer] = useState("");
-  const [secondAnswer, setSecondAnswer] = useState("");
-  const [thirdAnswer, setThirdAnswer] = useState("");
+  const [title, setTitle] = useState('');
+  const [members, setMembers] = useState('2');
+  const [description, setDescription] = useState('');
+  const [firstQuestion, setFirstQuestion] = useState('');
+  const [secondQuestion, setSecondQuestion] = useState('');
+  const [thirdQuestion, setThirdQuestion] = useState('');
+  const [firstAnswer, setFirstAnswer] = useState('');
+  const [secondAnswer, setSecondAnswer] = useState('');
+  const [thirdAnswer, setThirdAnswer] = useState('');
   const dispatch = useAppDispatch();
 
   const checkHandler: React.ChangeEventHandler<HTMLInputElement> = (): void => {
@@ -39,9 +39,10 @@ export default function AddRoomModal({
         firstAnswer,
         secondAnswer,
         thirdAnswer,
-        partyId
-      }),
+        partyId,
+      })
     );
+    hide();
   };
 
   return (
@@ -56,29 +57,29 @@ export default function AddRoomModal({
             <input
               onChange={(e) => setTitle(e.target.value)}
               value={title}
-              type="text"
-              placeholder="Придумайте название комнаты"
+              type='text'
+              placeholder='Придумайте название комнаты'
             />
             <input
               onChange={(e) => setMembers(e.target.value)}
               value={members}
-              type="number"
-              placeholder="Количество людей"
+              type='number'
+              placeholder='Количество людей'
             />
             <input
               onChange={(e) => setDescription(e.target.value)}
               value={description}
-              type="text"
-              placeholder="Описание"
+              type='text'
+              placeholder='Описание'
             />
           </div>
 
           <div className={styles.add_room__switch}>
             <p>Тест для новых участников</p>
-            <label className={styles.switch} id="switch_id">
+            <label className={styles.switch} id='switch_id'>
               <input
                 className={styles.add_room__switch__input}
-                type="checkbox"
+                type='checkbox'
                 checked={check}
                 onChange={checkHandler}
               />
@@ -92,14 +93,14 @@ export default function AddRoomModal({
               <input
                 value={firstQuestion}
                 onChange={(e) => setFirstQuestion(e.target.value)}
-                type="text"
-                placeholder="Вопрос 1"
+                type='text'
+                placeholder='Вопрос 1'
               />
               <select
                 onChange={(e) => setFirstAnswer(e.target.value)}
                 value={firstAnswer}
               >
-                <option value="" disabled></option>
+                <option value='' disabled></option>
                 <option>Да</option>
                 <option>Нет</option>
               </select>
@@ -108,14 +109,14 @@ export default function AddRoomModal({
               <input
                 value={secondQuestion}
                 onChange={(e) => setSecondQuestion(e.target.value)}
-                type="text"
-                placeholder="Вопрос 2"
+                type='text'
+                placeholder='Вопрос 2'
               />
               <select
                 onChange={(e) => setSecondAnswer(e.target.value)}
                 value={secondAnswer}
               >
-                <option value="" disabled></option>
+                <option value='' disabled></option>
                 <option>Да</option>
                 <option>Нет</option>
               </select>
@@ -124,20 +125,20 @@ export default function AddRoomModal({
               <input
                 value={thirdQuestion}
                 onChange={(e) => setThirdQuestion(e.target.value)}
-                type="text"
-                placeholder="Вопрос 3"
+                type='text'
+                placeholder='Вопрос 3'
               />
               {/* <button>Да</button> */}
               <select
                 onChange={(e) => setThirdAnswer(e.target.value)}
                 value={thirdAnswer}
               >
-                <option value="" disabled></option>
+                <option value='' disabled></option>
                 <option>Да</option>
                 <option>Нет</option>
               </select>
             </div>
-            <button type="submit" className={styles.add_room__btn}>
+            <button type='submit' className={styles.add_room__btn}>
               Создать комнату
             </button>
           </div>
