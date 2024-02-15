@@ -4,6 +4,8 @@ import { NavLink, Outlet } from "react-router-dom";
 import styles from "./style/Navigation.module.scss";
 import { useAppDispatch, useAppSelector } from "../../redux/store";
 import { logOut } from "../auth/authSlice";
+import { HashLink } from "react-router-hash-link";
+
 
 export default function Navigation(): JSX.Element {
   const { user } = useAppSelector((store) => store.auth);
@@ -25,9 +27,9 @@ export default function Navigation(): JSX.Element {
               </NavLink>
             </li>
             <li className={styles.item}>
-              <NavLink className="nav__button" to="/parties">
+              <HashLink className="nav__button" smooth to="#events">
                 Мероприятия
-              </NavLink>
+              </HashLink>
             </li>
             <li className={styles.item}>
               <NavLink className="nav__button" to="/chat">
@@ -35,9 +37,9 @@ export default function Navigation(): JSX.Element {
               </NavLink>
             </li>
             <li className={styles.item}>
-              <NavLink className="nav__button" to="/contacts">
+              <HashLink className="nav__button" smooth to="#footer_contacts">
                 Контакты
-              </NavLink>
+              </HashLink>
             </li>
           </div>
 
@@ -50,19 +52,19 @@ export default function Navigation(): JSX.Element {
               </li>
               <li className="nav__item lk">
                 <NavLink className="nav__button" to="/auth/authorization">
-                  Авторизация
+                  <span>Вход</span>
                 </NavLink>
               </li>
             </div>
           ) : (
             <>
-              <li>hello {user.name}</li>
-              <li className="nav__item lk">
+              {/* <li>hello {user.name}</li> */}
+              <li className={styles.lk}>
                 <NavLink className="nav__button" to="/profile">
-                  Profile
+                  Личный кабинет
                 </NavLink>
               </li>
-              <li className="nav__item">
+              <li className="nav__item lk">
                 <button
                   type="button"
                   onClick={onHandleLogout}

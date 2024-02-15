@@ -29,26 +29,25 @@ export default function AddRoomModal({
           <div className={styles.add_room__title}>
             <input type="text" placeholder="Придумайте название комнаты" />
             <input type="number" placeholder="Количество людей" />
-            <div className={styles.add_room__switch}>
-              <p>Тест для новых участников</p>
-              <div className={styles.switch} id="switch_id">
-                <input
-                  className={styles.add_room__switch__input}
-                  type="checkbox"
-                  checked={check}
-                  onChange={checkHandler}
-                />
-                <span className={`${styles.slider} ${styles.round}`} />
-              </div>
-            </div>
+          </div>
+          
+          <div className={styles.add_room__switch}>
+            <p>Тест для новых участников</p>
+            <label className={styles.switch} id="switch_id">
+              <input
+                className={styles.add_room__switch__input}
+                type="checkbox"
+                checked={check}
+                onChange={checkHandler}
+              />
+              <span className={`${styles.slider} ${styles.round}`} />
+            </label>
           </div>
 
           <div className={styles.add_room__questions}>
             <h2>Придумайте три вопроса</h2>
             <div className={styles.qa}>
               <input type="text" placeholder="Вопрос 1" />
-              {/* <button>Да</button>
-                            <button>Нет</button> */}
               <select>
                 <option>Да</option>
                 <option>Нет</option>
@@ -56,8 +55,6 @@ export default function AddRoomModal({
             </div>
             <div className={styles.qa}>
               <input type="text" placeholder="Вопрос 2" />
-              {/* <button>Да</button>
-                            <button>Нет</button> */}
               <select>
                 <option>Да</option>
                 <option>Нет</option>

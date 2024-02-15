@@ -7,6 +7,7 @@ import Map from '../map/Map';
 import Footer from '../footer/Footer';
 import { useNavigate } from 'react-router-dom';
 import video from './styles/1108706_1080p_4k_2k_3840x2160.mp4';
+import ThreeSteps from '../steps/ThreeSteps';
 
 export default function MainPage(): JSX.Element {
   const nav = useNavigate();
@@ -27,6 +28,7 @@ export default function MainPage(): JSX.Element {
       <About />
       <PartiesList />
       <Counter />
+      <ThreeSteps />
       <Map />
       <Footer />
     </>

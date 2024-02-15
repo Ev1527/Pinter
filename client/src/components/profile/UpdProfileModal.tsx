@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './styles/User.module.scss';
 import logoSml from './styles/user_logo_sml.png';
-import imgUpload from './styles/img_upload.png';
+// import imgUpload from './styles/img_upload.png';
+import imgUpload from './styles/img_upload.svg';
 
 export default function UpdProfileModal({ hide }: { hide: () => void }): JSX.Element {
 

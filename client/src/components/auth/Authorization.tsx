@@ -30,7 +30,7 @@ export default function Authorization(): JSX.Element {
   return (
     <div className={styles.container}>
       <form id="reg-form" onSubmit={onHandleSubmit}>
-        <h2>Страница авторизации</h2>
+        <h2>Без вас никуда! Мы ждали</h2>
         <div className="mb-3">
           <input
             value={email}

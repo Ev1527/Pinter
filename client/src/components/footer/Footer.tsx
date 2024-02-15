@@ -4,14 +4,18 @@ import email from './styles/email_icon.png';
 import vk from './styles/vk_icon.png';
 import telegram from './styles/telegram_icon.png';
 import { useNavigate } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 export default function Footer(): JSX.Element {
     const nav = useNavigate();
 
     return (
-        <div className={styles.footer__container}>
+        <div id="footer_contacts" className={styles.footer__container}>
             <div className={styles.left}>
-                <h2 onClick={() => nav('/main')}>PINTER</h2>
+                <HashLink smooth to="#">
+                    {/* <h2 onClick={() => nav('/main')}>PINTER</h2> */}
+                    <h2>PINTER</h2>
+                </HashLink>
                 <p>Планируйте свой досуг, не потратив времени и сил на поиск той самой компании!</p>
                 <p className={styles.copyright}>© 2024 Pinter. All rights reserved.</p>
             </div>

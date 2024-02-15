@@ -13,6 +13,8 @@ import PartiesList from "../components/party/PartiesList";
 import Map from "../components/map/Map";
 import UserProfile from "../components/profile/UserProfile";
 import PartyPage from "../components/party/PartyPage";
+import RoomPage from "../components/room/RoomPage";
+import ThreeSteps from "../components/steps/ThreeSteps";
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -30,10 +32,12 @@ function App(): JSX.Element {
             <Route path="/auth/authorization" element={<Authorization />} />
             <Route path="/main" element={<MainPage />} />
             <Route path="/parties" element={<PartiesList />} />
+            <Route path="/steps" element={<ThreeSteps />} />
             <Route path="/contacts" element={<Map />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/party" element={<PartyPage />} />
           </Route>
+          <Route path="/room" element={<RoomPage />} />
           <Route path="*" element={<Error />} />
         </Routes>
   );

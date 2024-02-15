@@ -35,7 +35,7 @@ export default function Registration(): JSX.Element {
   return (
     <div className={styles.container}>
       <form id="reg-form" onSubmit={onHandleSubmit}>
-        <h2>Страница регистрации</h2>
+        <h2>Добро пожаловать в Pinter</h2>
         <div>
           <input
             value={name}
@@ -77,7 +77,7 @@ export default function Registration(): JSX.Element {
             {error}
           </div>
         )}
-        <button type="submit">Сохранить</button>
+        <button type="submit">Зарегистрироваться</button>
       </form>
     </div>
   );

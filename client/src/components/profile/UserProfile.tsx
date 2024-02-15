@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import UserCard from './UserCard';
 import styles from './styles/User.module.scss';
 import UpdProfileModal from './UpdProfileModal';
+import bgTitle from './styles/profile_title.svg';
 
 export default function UserProfile(): JSX.Element {
     const [visible, setVisible] = useState(false);
@@ -16,7 +17,10 @@ export default function UserProfile(): JSX.Element {
                 <UpdProfileModal hide={hide} />
                 ) : (
                 <div className={styles.user__profile}>
-                    <UserCard />
+                    <div className={styles.user__profile__header}>
+                        <UserCard />
+                        <img src={bgTitle} alt="" />
+                    </div>
                     <h1>Мои мероприятия</h1>
                     <hr />
                     {/* <UpdProfileModal hide={hide} /> */}

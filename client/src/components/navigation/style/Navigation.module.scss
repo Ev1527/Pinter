@@ -64,6 +64,14 @@
             width:  100%;
             opacity:  1;
         }
+
+        span {
+            display: flex;
+            gap: 5px;
+            &::after {
+                content: url('./login_icon.svg');
+            }
+        }
     }
 
     button {
@@ -72,7 +80,7 @@
         color: #DFE0E7;
         font-family: 'Poppins', sans-serif;
         font-weight: 400;
-        border: 1px solid #DFE0E7;
+        border: 1px solid #55565F;
         padding: 5px 40px 5px;
         background-color: transparent;
         cursor: pointer;

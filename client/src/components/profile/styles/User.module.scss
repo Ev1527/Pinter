@@ -7,14 +7,13 @@
     border: 1px solid #7e7e7e;
     border-radius: 20px;
     text-align: start;
-    background-color: #565659;
-    // background-color: rgba(104, 103, 111, 0.5);
+    background-color: #55565F;
 
     &__img {
         width: auto;
         height: auto;
         border-radius: 50%;
-        border: 1px solid #7e7e7e;
+        border: 1px solid #CACACA;
         background-size: cover;
     }
 
@@ -55,25 +54,38 @@
         font-size: 14px;
         color: #DFE0E7 !important;
         font-weight: 300;
-        text-decoration: underline #7e7e7e;
+        text-decoration: underline #DFE0E7;
         text-underline-offset: 0.5em;
         cursor: pointer;
         margin-top: 15px;
 
         &::before {
-            content: url('./user_icon.png');
+            content: url('./user_icon.svg');
         }
     }
 }
 
 .user__profile {
     position: relative;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 20px;
-    background: url('./profile_title.png') no-repeat 110% 30px;
+    // background: url('./profile_title.svg') no-repeat 101%;
     opacity: 0.8;
     // background-size: contain;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        img {
+            width: 650px;
+            max-width: 800px;
+        }
+    }
     
     h1 {
         font-size: 40px;
@@ -135,8 +147,10 @@
                 align-items: center;
                 gap: 15px;
                 border: none;
-                font-size: 16px;
+                font-size: 18px;
+                font-weight: 500;
                 color: #DFE0E7;
+                background-color: transparent;
                 margin-right: 35px;
                 cursor: pointer;
     
@@ -152,16 +166,18 @@
             align-items: center;
             gap: 15px;
             margin-left: 35px;
-            text-decoration: underline #7e7e7e;
+            text-decoration: underline #DFE0E7;
             text-underline-offset: 0.5em;
             color: #DFE0E7;
+            font-size: 18px;
+            font-weight: 500;
         }
     
         &__img {
             height: 60px;
             width: 60px;
             border-radius: 50%;
-            border: 1px solid #7e7e7e;
+            border: 1px solid #DFE0E7;
             background-size: cover;
         }
     
@@ -178,6 +194,8 @@
             }
     
             img {
+                width: 265px;
+                height: 320px;
                 margin-top: 20px;
                 border-radius: 10px;
                 border: 1px solid #7e7e7e;
@@ -198,7 +216,7 @@
                     border-radius: 10px;
                     // border-style: none;
                     border: 1px solid #7e7e7e;
-                    background-color: #252527;
+                    background-color: rgba(66,  67,  73,  0.25);
                     padding-left: 10px;
                     color: #DFE0E7;
                     font-size: 18px;

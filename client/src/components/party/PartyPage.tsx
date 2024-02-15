@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import RoomItems from "./RoomItems";
 import styles from "./styles/Party.module.scss";
-import findYours from "./styles/Найти своих.png";
+import findYours from "./styles/find_yours.svg";
 import AddRoomModal from "../room/AddRoomModal";
 
 export default function PartyPage(): JSX.Element {
@@ -13,7 +13,7 @@ export default function PartyPage(): JSX.Element {
 
   return (
     <div className={styles.party_page}>
-      <img className={styles.findYours} src={findYours} alt="" />
+      <img className={styles.findYours} src={findYours} alt="find your company" />
       <div className={styles.party_page__info}>
         <button type="button" onClick={() => setVisible(true)}>
           Создать комнату
