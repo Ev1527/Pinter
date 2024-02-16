@@ -11,7 +11,8 @@ router.post('/', verifyAccessToken, async (req, res) => {
     const message = await Message.create({
       text,
       userId: user.id, 
-      // room_dialogue_id
+      time_stamp: new Date(),
+      room_dialogue_id: 1,
     });
     // Отправка сохраненного сообщения обратно клиенту или через WebSocket всем подключенным пользователям
     res.status(201).json(message);
