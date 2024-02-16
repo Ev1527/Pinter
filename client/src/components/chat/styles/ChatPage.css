@@ -1,0 +1,35 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.messages-container {
+  width: 80%;
+  height: 300px;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.input-message {
+  width: 78%;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+.send-button {
+  padding: 10px 15px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.send-button:hover {
+  background-color: #0056b3;
+}
