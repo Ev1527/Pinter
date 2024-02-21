@@ -17,19 +17,24 @@ export default function Registration(): JSX.Element {
   const onHandleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     dispatch(registration({ name, email, password, cpassword }))
-      .then(
-        (data) => {
-          if ("error" in data) {
-            setError(data.error.message);
-            return;
-          }
-          navigate("/");
-        },
-      )
-      .catch((error: any) => {
-        console.log(error);
-      });
-  };
+    .then((data) => {
+      if ("error" in data) {
+        setError(data.error.message); // Показываем ошибку, если авторизация не удалась
+        return; // Прерываем выполнение функции, чтобы не перенаправлять пользователя
+      }
+        interface User{
+          id: number | undefined,
+          name: string,
+        }
+        const user: User = {id: data.payload.id, name: data.payload.name}
+        localStorage.setItem('user', JSON.stringify(user)); // Сохраняем userId в localStorage       
+        navigate("/"); // Переадресация на главную страницу
+    })
+    .catch((error) => {
+      console.log(error);
+      setError("Произошла ошибка при авторизации"); // Установка сообщения об ошибке при возникновении исключения
+    });
+};
 
   return (
     <div className={styles.container}>

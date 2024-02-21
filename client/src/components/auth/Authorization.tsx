@@ -19,15 +19,23 @@ export default function Authorization(): JSX.Element {
     dispatch(authorization({ email, password }))
       .then((data) => {
         if ("error" in data) {
-          setError(data.error.message);
-          return;
+          setError(data.error.message); // Показываем ошибку, если авторизация не удалась
+          return; // Прерываем выполнение функции, чтобы не перенаправлять пользователя
         }
-        navigate("/");
+          interface User{
+            id: number | undefined,
+            name: string,
+          }
+          const user: User = {id: data.payload.id, name: data.payload.name}
+          localStorage.setItem('user', JSON.stringify(user)); // Сохраняем userId в localStorage       
+          navigate("/"); // Переадресация на главную страницу
       })
       .catch((error) => {
         console.log(error);
+        setError("Произошла ошибка при авторизации"); // Установка сообщения об ошибке при возникновении исключения
       });
-  };
+};
+
 
   return (
     <div className={styles.container}>

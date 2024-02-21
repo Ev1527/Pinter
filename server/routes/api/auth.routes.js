@@ -48,7 +48,7 @@ router.post("/sign-up", async (req, res) => {
           httpOnly: true,
         })
         .status(201)
-        .json(userInDb);
+        .json(userInDb); 
       return;
     }
   } catch ({ message }) {

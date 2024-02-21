@@ -44,9 +44,16 @@ const authSlice = createSlice({
       })
       .addCase(checkAuth.fulfilled, (state, action) => {
         state.user = action.payload;
+        if(!action.payload?.name) {
+          localStorage.removeItem('user');
+          localStorage.clear();
+        }
+        
       })
       .addCase(logOut.fulfilled, (state) => {
         state.user = undefined;
+        localStorage.removeItem('user');
+        localStorage.clear();
       })
       .addCase(updProfile.fulfilled, (state, action) => {
         state.user = action.payload;
