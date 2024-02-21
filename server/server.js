@@ -48,9 +48,14 @@ wss.on('connection', function connection(ws) {
       console.log('Сообщение сохранено', newMessage);
 
       // Отправляем сообщение обратно всем подключенным клиентам (опционально)
+      // wss.clients.forEach(function each(client) {
+      //   if (client !== ws && client.readyState === WebSocket.OPEN) {
+      //     client.send(data);
+      //   }
+      // });
       wss.clients.forEach(function each(client) {
-        if (client !== ws && client.readyState === WebSocket.OPEN) {
-          client.send(data);
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(JSON.stringify(newMessage)); // Отправляем JSON объект
         }
       });
     } catch (error) {

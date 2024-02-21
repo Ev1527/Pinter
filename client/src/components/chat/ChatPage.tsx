@@ -292,20 +292,21 @@
 
 // export default ChatPage;
 
+import axios from "axios";
 import React, { useState, useEffect } from "react";
-// import { jwtDecode } from "jwt-decode";
 import { useParams } from "react-router-dom";
 
 
 interface IMessage {
-  message: string;
-  // Добавьте другие поля, если они есть в объекте сообщения
+  text: string;
+ 
 }
 
 const ChatPage = () => {
   const [ws, setWs] = useState<WebSocket | null>(null);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<IMessage[]>([]);
+  const [ allMessages, setAllMessages ] = useState<IMessage[]>([])
   const {roomId} = useParams()
 
 
@@ -314,14 +315,29 @@ const ChatPage = () => {
     ws.onmessage = (event) => {
       console.log('Получено сообщение:', event.data);
       const message = JSON.parse(event.data);
-      setMessages((prevMessages) => [...prevMessages, message]);
+      // Обновляем состояние allMessages, добавляя новое сообщение
+      setAllMessages((prevMessages) => [...prevMessages, message]);
     };
     setWs(ws);
-
+  
     return () => {
       ws?.close();
     };
   }, []);
+
+  useEffect(() => {
+    const takeMessages = async () => {
+      try {
+        const {data} = await axios(`/api/message/${roomId}`);
+        setAllMessages(data)
+        
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    takeMessages()
+  }, [])
+  
 
   
   const sendMessage = () => {
@@ -352,12 +368,14 @@ const ChatPage = () => {
       sendMessage();
     }
   };
+  
+console.log(allMessages);
 
   return (
     <div>
       <div>
-        {messages.map((msg, index) => (
-          <p key={index}>{msg.message}</p>
+        {allMessages.map((msg, index) => (
+          <p key={index}>{msg.text}</p>
         ))}
       </div>
       <input

@@ -23,3 +23,25 @@
 // });
 
 // module.exports = router;
+
+const express = require('express');
+const router = express.Router()
+
+const { Message } = require('../../db/models')
+
+router.get('/:roomId', async (req, res) =>{
+  try {
+    const { roomId } = req.params
+    const messages = await Message.findAll({
+      where: { room_dialogue_id: roomId }
+    })
+    res.json(messages)
+  } catch (error) {
+    console.error('CURVA:', error);
+    res.status(500).json({ message: 'CURVA' })
+  }
+})
+
+
+
+module.exports = router;
