@@ -254,7 +254,7 @@ console.log(allMessages);
         <div className={styles.users}>
           <h2>Чат встречи</h2>
           {users && users.map((user) => (
-            <img src={user.image} alt="" />
+            <img key={user.id} src={user.image} alt="user logo" />
           ))}
         </div>
         <div className={styles.chat__header__info}>
