@@ -188,10 +188,7 @@ const ChatPage = (): JSX.Element => {
     const takeMessages = async () => {
       try {
         const { data } = await axios(`/api/message/${roomId}`);
- 
-        // console.log('data messages user: ', data.messages[0].user);
-        // console.log('data messages: ', data.message);
-
+        
         // const users = data.messages.map(message => message.user);
         const users = Object.values(data.messages.reduce((acc: any, message: any) => {
           // Проверяем, есть ли уже такой пользователь в аккумуляторе
@@ -201,7 +198,6 @@ const ChatPage = (): JSX.Element => {
           }
           return acc;
         }, {}));
-        console.log('data messages users: ', users);
 
         setAllMessages(data.messages);
         setRoomTitle(data.room.title);
@@ -249,39 +245,41 @@ const ChatPage = (): JSX.Element => {
 console.log(allMessages);
 
   return (
-    <div className={styles.chat}>
-      <div className={styles.chat__header}>
-        <div className={styles.users}>
-          <h2>Чат встречи</h2>
-          {users && users.map((user) => (
-            <img src={user.image} alt="" />
-          ))}
+    <div className={styles.chat__container}>
+      <div className={styles.chat}>
+        <div className={styles.chat__header}>
+          <div className={styles.users}>
+            <h2>Чат встречи</h2>
+            {users && users.map((user) => (
+              <img key={user.id} src={user.image} alt="user logo" />
+            ))}
+          </div>
+          <div className={styles.chat__header__info}>
+            <p>Тема: <span className={styles.title}>{roomTitle || 'Безымянный чат'}</span></p>
+            <p>Описание: <span>{roomDescription}</span></p>
+          </div>
+          <div className={styles.chat__header__nav}>
+            <p onClick={() => nav(-1)}>Назад</p>
+            <h3 onClick={() => nav('/')}>На главную</h3>
+          </div>
         </div>
-        <div className={styles.chat__header__info}>
-          <p>Тема: <span className={styles.title}>{roomTitle || 'Безымянный чат'}</span></p>
-          <p>Описание: <span>{roomDescription}</span></p>
-        </div>
-        <div className={styles.chat__header__nav}>
-          <p onClick={() => nav(-1)}>Назад</p>
-          <h3 onClick={() => nav('/')}>На главную</h3>
-        </div>
-      </div>
-      <div className={styles.chat__body}>
-        <div className={styles.messages}>
-          {allMessages.map((msg, index) => (
-            <Message key={index} message={msg} isCurrentUser={msg.userId == msg.user?.id} />
-          ))}
-        </div>
+        <div className={styles.chat__body}>
+          <div className={styles.messages}>
+            {allMessages.map((msg, index) => (
+              <Message key={index} message={msg} isCurrentUser={msg.userId == msg.user?.id} />
+            ))}
+          </div>
 
-        <div className={styles.send_message}>
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onBlur={sendMessage}
-            onKeyDown={handleKeyPress}
-            placeholder="Введите сообщение"
-          />
-          <button type="button" onClick={sendMessage}>Отправить</button>
+          <div className={styles.send_message}>
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onBlur={sendMessage}
+              onKeyDown={handleKeyPress}
+              placeholder="Написать сообщение..."
+            />
+            <button type="button" onClick={sendMessage}>Отправить</button>
+          </div>
         </div>
       </div>
     </div>

@@ -134,7 +134,7 @@ router.post("/test", async (req, res) => {
       const access_table = await Access_Table.findOne({
         where: { id: access.id },
       });
-      return res.json(access_table);
+      return res.json({ access_table, message: 'ok' });
     }
 
     const room = await Room_Dialogue.findOne({
@@ -149,7 +149,7 @@ router.post("/test", async (req, res) => {
       where: { id: access.id },
     });
 
-    res.json(access_table);
+    res.json({ access_table, message: 'failed' });
   } catch ({ message }) {
     res.json(message);
   }

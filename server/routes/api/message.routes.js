@@ -27,7 +27,7 @@
 const express = require('express');
 const router = express.Router()
 
-const { Message, Room_Dialogue, Group_Member, User } = require('../../db/models')
+const { Message, Room_Dialogue, User } = require('../../db/models')
 
 router.get('/:roomId', async (req, res) =>{
   try {

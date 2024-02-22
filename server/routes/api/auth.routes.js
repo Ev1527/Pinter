@@ -130,6 +130,7 @@ router.get("/check", async (req, res) => {
           email: user.email,
           name: user.name,
           password: user.password,
+          image: userInDb.image,
         },
       });
     } else {

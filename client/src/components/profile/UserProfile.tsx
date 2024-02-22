@@ -5,43 +5,36 @@ import UpdProfileModal from './UpdProfileModal';
 import bgTitle from './styles/profile_title.svg';
 import NavForProfile from '../navigation/NavForProfile';
 import UserPartyItem from './UserPartyItem';
-import axios from 'axios';
-import { useAppSelector } from '../../redux/store';
-import { PartyWithRoomId } from './types/UserParties';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { UserPartyRoom } from './types/UserParties';
+import { loadUserPartyRooms } from './profileSlice';
+
 
 export default function UserProfile(): JSX.Element {
     const [visible, setVisible] = useState(false);
     const { user } = useAppSelector((store) => store.auth);
-    const [parties, setParties] = useState <PartyWithRoomId[]>([]);
-    // const userId: number = user?.id as number;
-    // console.log(userId);
+    const [userParties, setUserParties] = useState <UserPartyRoom[]>([]);
+    const dispatch = useAppDispatch();
+
+    console.log('user: ', user);
     
     const hide = (): void => {
         setVisible(true)
     }
 
     useEffect(() => {
-        const userPartiesWithRoomId = async () => {
-            const { data } = await axios(`/api/users/parties/${user?.id}`);
-            // setParties(data);
-            if (Array.isArray(data)) {
-                setParties(data);
-            } else {
-                console.error('Server response is not an array:', data);
-            }
-        }
-        userPartiesWithRoomId();
-    }, [])
-    console.log(parties);
+        dispatch(loadUserPartyRooms(user?.id)).then((data) => {
+            setUserParties(data.payload);
+        })
+        // const userPartyRooms = async () => {
+        //     const { data } = await axios(`/api/users/parties/${user?.id}`);
+        //     setUserParties(data);
+        // }
+        // userPartyRooms();
 
-    // const delUserFromRoomHandler = async (userId: number): Promise<void> => {
-    //     try {
-    //         const { data } = await axios.delete(`/api/users/roomdialogue/${userId}`);
-    //         setParties(data);
-    //     } catch (error) {
-    //         console.error('Error deleting room member', error)
-    //     }
-    // }
+    }, [user, dispatch])
+    console.log(userParties);
+
 
     const bgDivColors = ['#3C4D34', '#422222', '#242E3C', '#3B2643', '#3E090F'];
 
@@ -59,14 +52,15 @@ export default function UserProfile(): JSX.Element {
                     <h1>Мои мероприятия</h1>
                     <hr />
                     <div className={styles.user__profile__body}>
-                        {parties ? (parties.map((party, index) => (
-                            <UserPartyItem key={party.id} party={party} color={bgDivColors[index % bgDivColors.length]} />
+                        {userParties.length > 0 ? (userParties.map((room, index) => (
+                            <UserPartyItem key={room.id} room={room} color={bgDivColors[index % bgDivColors.length]} />
                         ))) : (
-                            <p>Список мероприятий пока пуст</p>
+                            <div className={styles.user__profile__body__empty}>
+                                <p>Список мероприятий пока пуст.</p>
+                                <p>Перейдите на страницу интересной вам вечеринки из раздела "Мероприятия".</p>
+                                <p>Создайте свою первую комнату, либо присоединитесь к существующей.</p>
+                            </div>
                         )}
-                        {/* <UserPartyItem />
-                        <UserPartyItem />
-                        <UserPartyItem /> */}
                     </div>
                 </div>
             )}            
