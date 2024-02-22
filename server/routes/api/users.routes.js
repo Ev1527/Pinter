@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require("bcrypt");
-const { User, Party, Room_Dialogue, Group_Member } = require('../../db/models');
+const { User, Party, Room_Dialogue, Group_Member, Access_Table } = require('../../db/models');
 const generateTokens = require("../../utils/authUtils");
 const cookiesConfig = require("../../config/cookiesConfig");
 
