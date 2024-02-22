@@ -1,7 +1,7 @@
 const jwtConfig = {
   access: {
     type: "access",
-    expiresIn: `${1000 * 60 * 5 * 24}`,
+    expiresIn: `${1000 * 60 * 60 * 23}`,
   },
   refresh: {
     type: "refresh",

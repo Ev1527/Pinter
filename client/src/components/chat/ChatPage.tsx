@@ -168,7 +168,7 @@ const ChatPage = (): JSX.Element => {
 
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:3001");
+    const ws = new WebSocket("wss://pinter.fun/ws/");
     ws.onmessage = (event) => {
       console.log('Получено сообщение:', event.data);
       const message = JSON.parse(event.data);

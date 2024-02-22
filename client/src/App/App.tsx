@@ -6,7 +6,7 @@ import Navigation from "../components/navigation/Navigation";
 import Error from "../components/404/Error";
 import Registration from "../components/auth/Registration";
 import Authorization from "../components/auth/Authorization";
-import { useAppDispatch, useAppSelector } from "../redux/store";
+import { useAppDispatch } from "../redux/store";
 import { checkAuth } from "../components/auth/authSlice";
 import MainPage from "../components/main/MainPage";
 import PartiesList from "../components/party/PartiesList";
@@ -21,8 +21,8 @@ import { allAccessTables } from "../components/room/roomSlice";
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
-  axios.defaults.baseURL = "http://localhost:3001";
-  // axios.defaults.baseURL = "https://pinter.fun";
+  // axios.defaults.baseURL = "http://localhost:3001";
+  axios.defaults.baseURL = "https://pinter.fun";
   axios.defaults.withCredentials = true;
 
   useEffect(() => {

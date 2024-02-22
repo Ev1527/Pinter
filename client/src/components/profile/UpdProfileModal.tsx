@@ -18,7 +18,7 @@ export default function UpdProfileModal({ hide }: { hide: () => void }): JSX.Ele
 
     const changeProfileHandler = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        dispatch(updProfile({ id: user?.id, name, email, password }));
+        dispatch(updProfile({ id: user?.id, name, email, password, image: userProfileImg }));
         hide();
     }
 

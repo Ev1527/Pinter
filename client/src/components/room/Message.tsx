@@ -10,7 +10,7 @@ export default function Message({ message, isCurrentUser }: { message: IMessage,
     // Форматирование даты и времени
     const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-    // console.log('message', message);
+    console.log(isCurrentUser, 'isCurrentUser');
     
     
     const userAvatar = message.user?.image || userLogo;
