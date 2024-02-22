@@ -14,76 +14,72 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/profile/:userId', async (req, res) => {
-    try {
-        const { userId } = req.params;
-        const userParties = await Group_Member.findAll({
-            where: { user_id: userId },
-            include: { model: Room_Dialogue },
-            // include: [
-            //     { model: Room_Dialogue },
-            //     { model: Party },
-            // ]
-        });
-        console.log('userParties: ==========', userParties);
+// router.get('/profile/:userId', async (req, res) => {
+//     try {
+//         const { userId } = req.params;
+//         const userParties = await Group_Member.findAll({
+//             where: { user_id: userId },
+//             include: { model: Room_Dialogue },
+//         });
+//         // console.log('userParties: ==========', userParties);
 
-        if (userParties && userParties.length >  0) {
-            const partyIds = userParties.map(userParty => userParty.Room_Dialogue.party_id);
-            const parties = await Party.findAll({ where: { id: partyIds } });
-            userParties[0].dataValues.parties = parties;
-            res.json(parties);
-            return;
-        } else {
-            res.json({ message: 'No user parties found' });
-        }
+//         if (userParties && userParties.length >  0) {
+//             const partyIds = userParties.map(userParty => userParty.Room_Dialogue.party_id);
+//             const parties = await Party.findAll({ where: { id: partyIds } });
+//             userParties[0].dataValues.parties = parties;
+//             res.json(parties);
+//             return;
+//         } else {
+//             res.json({ message: 'No user parties found' });
+//         }
         
-    } catch ({ message }) {
-        res.json({ message: 'Error while reading user parties'})
-    }
-})
+//     } catch ({ message }) {
+//         res.json({ message: 'Error while reading user parties'})
+//     }
+// })
 
 router.get('/parties/:userId', async (req, res) => {
-    // try {
-    //     const { userId } = req.params;
-    //     const groupsMember = await Group_Member.findAll({
-    //         where: { user_id: userId },
-    //         include: { model: Room_Dialogue },
-    //     })
-    //     const rooms = groupsMember.map(member => member.Room_Dialogue);
-    //     console.log('rooms: ', rooms);
-    //     res.json(rooms);
-        
-    // } catch ({ message }) {
-    //     res.json({ message: 'Error while reading user chats' })
-    // }
-
     try {
         const { userId } = req.params;
+
         const userParties = await Group_Member.findAll({
             where: { user_id: userId },
             include: { model: Room_Dialogue },
         });
 
-        if (userParties && userParties.length > 0) {
-            const partyIds = userParties.map(userParty => userParty.Room_Dialogue.party_id);
-            const parties = await Party.findAll({ where: { id: partyIds } });
+        const rooms = userParties.map(userParty => {
+            return userParty.Room_Dialogue;
+        });
 
-            const partiesWithRoomIds = parties.map(party => {
-                const userParty = userParties.find(userParty => userParty.Room_Dialogue.party_id === party.id);
-                if (userParty) {
-                    return {
-                        ...party.dataValues,
-                        room_id: userParty.Room_Dialogue.id,
-                    };
-                }
-                return party;
-            });
-            console.log('partiesWithRoomIds: ======', partiesWithRoomIds);
-            res.json(partiesWithRoomIds);
-            return;
-        } else {
-            res.json({ message: 'No user parties found' })
-        }
+        const roomIds = rooms.map(room => room.id);
+        const userPartyRooms = await Room_Dialogue.findAll({
+            where: { id: roomIds },
+            include: { model: Party },
+        })
+
+        res.json(userPartyRooms);
+        
+
+        // if (userParties && userParties.length > 0) {
+        //     const partyIds = userParties.map(userParty => userParty.Room_Dialogue.party_id);
+        //     const parties = await Party.findAll({ where: { id: partyIds } });
+
+        //     const partiesWithRoomIds = parties.map(party => {
+        //         const userParty = userParties.find(userParty => userParty.Room_Dialogue.party_id === party.id);
+        //         if (userParty) {
+        //             return {
+        //                 ...party.dataValues,
+        //                 room_id: userParty.Room_Dialogue.id,
+        //             };
+        //         }
+        //         return party;
+        //     });
+        //     // console.log('partiesWithRoomIds: ======', partiesWithRoomIds);
+        //     res.json(partiesWithRoomIds);
+        //     return;
+        // } else {
+        //     res.json({ message: 'No user parties found' })
+        // }
         
     } catch ({ message }) {
         res.json({ message: 'Error while reading user parties' })
@@ -153,33 +149,25 @@ router.put('/profile', async (req, res) => {
     }
 })
 
-// router.delete('/roomdialogue/:userId', async (req, res) => {
-//     try {
-//         const { userId } = req.params;
-//         const result = await Group_Member.destroy({ where: { user_id: userId } })
-//         // if (result > 0) {
-//         //     res.json({ message: 'success' })
-//         // }
-
-//         const userParties = await Group_Member.findAll({
-//             where: { user_id: userId },
-//             include: { model: Room_Dialogue },
-//         });
-//         console.log('userParties: ==========', userParties);
-
-//         if (userParties && userParties.length >  0) {
-//             const partyIds = userParties.map(userParty => userParty.Room_Dialogue.party_id);
-//             const parties = await Party.findAll({ where: { id: partyIds } });
-//             userParties[0].dataValues.parties = parties;
-//             res.json(parties);
-//             return;
-//         } else {
-//             res.json({ message: 'No user parties found' });
-//         }
+router.delete('/room/:roomId', async (req, res) => {
+    try {
+        const { roomId } = req.params;
+        const room = await Room_Dialogue.findOne({ where: { id: roomId } })
+        const result = await Group_Member.destroy({ where: { user_id: res.locals.user.id, room_dialogue_id: roomId } })
+        const result2 = await Access_Table.destroy({ where: { user_id: res.locals.user.id, room_token: room.token } })
         
-//     } catch ({ message }) {
-//         res.json({ message: 'Error while deleting user from room' })
-//     }
-// })
+        console.log('room ', room);
+        console.log('result ', result);
+        console.log('result2 ', result2);
+
+        if (result > 0 && result2 > 0) {
+            res.json(roomId)
+            return
+        }
+        
+    } catch ({ message }) {
+        res.json({ message: 'Error while deleting user from room' })
+    }
+})
 
 module.exports = router

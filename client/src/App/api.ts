@@ -1,13 +1,15 @@
 import axios from "axios";
-import type { User } from "../components/users/types/User";
+import type { User, UserId } from "../components/users/types/User";
 import { AuthAuthoriza, AuthReg } from "../components/auth/types/AuthState";
 import { Party } from "../components/party/types/PartyState";
 import {
+  Access,
   Access_Table,
   CreateRoomWithTest,
   Room,
   RoomTest,
 } from "../components/room/types/RoomState";
+import { UserPartyRoomId } from "../components/profile/types/UserParties";
 
 // auth + users
 export const registrationAxios = async (value: AuthReg): Promise<User> => {
@@ -87,9 +89,23 @@ export const createRoomDialogue = async (
 
 //test
 
-export const passTheTest = async (test: RoomTest): Promise<Access_Table> => {
+export const passTheTest = async (test: RoomTest): Promise<Access> => {
   const { data } = await axios.post("/api/room/test", {
     data: test,
   });
+  return data;
+};
+
+// userpartyRooms
+
+export const userPartyRooms = async (id: UserId) => {
+  const { data } = await axios(`/api/users/parties/${id}`);
+  return data;
+};
+
+export const deleteUserPartyRoom = async (id: UserPartyRoomId) => {
+  const { data } = await axios.delete(`api/users/room/${id}`);
+  console.log(data);
+  
   return data;
 };

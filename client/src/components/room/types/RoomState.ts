@@ -6,12 +6,25 @@ export type Room = {
   members: number;
   token: string;
 };
+
 export type Access_Table = {
   id: number;
   room_token: string;
   access: boolean;
   user_id: number;
 };
+
+// добавила
+export type Message = {
+  message: string;
+};
+
+export type Access = {
+  access_table: Access_Table;
+  message: Message;
+}
+// ________________________
+
 export type RoomsState = {
   rooms: Room[];
   access_tables: Access_Table[];

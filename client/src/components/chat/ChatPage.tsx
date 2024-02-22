@@ -161,7 +161,7 @@ const ChatPage = (): JSX.Element => {
   const [allMessages, setAllMessages] = useState<any[]>([]);
   const [roomTitle, setRoomTitle] = useState<string | null>(null);
   const [roomDescription, setRoomDescription] = useState<string | null>(null);
-  const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<any[]>([]);
 
   const { roomId } = useParams();
   const nav = useNavigate();
@@ -188,10 +188,6 @@ const ChatPage = (): JSX.Element => {
     const takeMessages = async () => {
       try {
         const { data } = await axios(`/api/message/${roomId}`);
- 
-        // console.log('data messages user: ', data.messages[0].user);
-        // console.log('data messages: ', data.message);
-        console.log('data rooms: ', data.room);
         
         // const users = data.messages.map(message => message.user);
         const users = Object.values(data.messages.reduce((acc: any, message: any) => {
@@ -202,7 +198,6 @@ const ChatPage = (): JSX.Element => {
           }
           return acc;
         }, {}));
-        console.log('data messages users: ', users);
 
         setAllMessages(data.messages);
         setRoomTitle(data.room.title);

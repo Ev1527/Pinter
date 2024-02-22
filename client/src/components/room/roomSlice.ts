@@ -38,7 +38,7 @@ const roomsSlice = createSlice({
       state.access_tables = action.payload;
     });
     builder.addCase(passTestRoom.fulfilled, (state, action) => {
-      state.access_tables.push(action.payload);
+      state.access_tables.push(action.payload.access_table);
     });
   },
 });

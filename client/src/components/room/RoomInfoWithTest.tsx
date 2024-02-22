@@ -4,7 +4,7 @@ import { Room } from "./types/RoomState";
 import { passTestRoom } from "./roomSlice";
 import { useAppDispatch } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+
 
 export default function RoomInfoWithTest({
   hide,
@@ -29,12 +29,13 @@ export default function RoomInfoWithTest({
         thirdAnswer,
         roomId,
       }),
-    ).then((data) => {
-      if (data.payload === "ok") {
-        navigate("/chat");
+    ).then((data: any) => {
+
+      if (data.payload.message === "ok") {
+        navigate(`/chat/${roomId}`);
         return;
       }
-      return;
+      return alert("Вы не можете войти в эту комнату");
     });
     hide();
   };
