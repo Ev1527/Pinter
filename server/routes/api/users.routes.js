@@ -153,18 +153,15 @@ router.delete('/room/:roomId', async (req, res) => {
     try {
         const { roomId } = req.params;
         const room = await Room_Dialogue.findOne({ where: { id: roomId } })
-        const result = await Group_Member.destroy({ where: { user_id: res.locals.user.id, room_dialogue_id: roomId } })
-        const result2 = await Access_Table.destroy({ where: { user_id: res.locals.user.id, room_token: room.token } })
+        // const result = await Group_Member.destroy({ where: { user_id: res.locals.user.id, room_dialogue_id: roomId } })
+        // const result2 = await Access_Table.destroy({ where: { user_id: res.locals.user.id, room_token: room.token } })
         
-        console.log('room ', room);
-        console.log('result ', result);
-        console.log('result2 ', result2);
-
-        if (result > 0 && result2 > 0) {
-            res.json(roomId)
-            return
-        }
-        
+        console.log(room);
+        // if (result > 0 && result2 > 0) {
+        //     res.json(roomId)
+        //     return
+        // }
+        res.json(roomId)
     } catch ({ message }) {
         res.json({ message: 'Error while deleting user from room' })
     }
