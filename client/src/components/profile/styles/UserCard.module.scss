@@ -17,8 +17,7 @@
         height: 200px;
         border-radius: 50%;
         margin-left: 10px;
-        // background: url('./user_logo_example.png') no-repeat;
-        // background-size: cover;
+        object-fit: cover;
     }
 
     &__info {

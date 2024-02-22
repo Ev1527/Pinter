@@ -56,7 +56,6 @@ export default function PartyPage(): JSX.Element {
           {/* <button type="button" onClick={createRoomHandler}>
             Создать комнату
           </button> */}
-
           <div className={styles.time_place}>
             <p>{`${party?.time} | ${party?.date}`}</p>
             <p>{party?.title}</p>

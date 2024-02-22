@@ -30,6 +30,7 @@ export default function UserPartyItem({
 
   useEffect(() => {
   }, [deleteRoomHandler]);
+
   return (
     <div className={styles.user__party__item}>
       <div className={styles.user__party__item__header}>
@@ -38,7 +39,7 @@ export default function UserPartyItem({
         </span>
         <img onClick={deleteRoomHandler} src={btnX} alt="delete" />
       </div>
-      <img className={styles.user__party__item__img} src={partyImage} alt="" />
+      <img className={styles.user__party__item__img} src={partyImage} alt="Party image" />
       <div
         style={{ backgroundColor: color }}
         className={styles.user__party__item__footer}

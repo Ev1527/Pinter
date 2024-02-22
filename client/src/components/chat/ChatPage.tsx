@@ -168,11 +168,13 @@ const ChatPage = (): JSX.Element => {
 
 
   useEffect(() => {
-    const ws = new WebSocket("wss://pinter.fun/ws/");
+    // const ws = new WebSocket("wss://pinter.fun/ws/");
+    const ws = new WebSocket("ws://localhost:3001/ws/");
+
     ws.onmessage = (event) => {
       console.log('Получено сообщение:', event.data);
       const message = JSON.parse(event.data);
-      console.log(message);
+      // console.log(message);
       
       // Обновляем состояние allMessages, добавляя новое сообщение
       setAllMessages((prevMessages) => [...prevMessages, message]);
@@ -189,7 +191,6 @@ const ChatPage = (): JSX.Element => {
       try {
         const { data } = await axios(`/api/message/${roomId}`);
         
-        // const users = data.messages.map(message => message.user);
         const users = Object.values(data.messages.reduce((acc: any, message: any) => {
           // Проверяем, есть ли уже такой пользователь в аккумуляторе
           if (!acc[message.user.id]) {
@@ -212,14 +213,12 @@ const ChatPage = (): JSX.Element => {
     takeMessages()
   }, [])
   
-
-  
   const sendMessage = () => {
     const userJson: string | null = localStorage.getItem("user");
     let user
     if (userJson !== null) {
       // console.log(JSON.parse(userJson));
-    user = JSON.parse(userJson);
+      user = JSON.parse(userJson);
     } else {
       // console.log({ messages });
       return
@@ -242,7 +241,7 @@ const ChatPage = (): JSX.Element => {
     }
   };
   
-console.log(allMessages);
+  // console.log(allMessages);
 
   return (
     <div className={styles.chat__container}>
@@ -274,7 +273,7 @@ console.log(allMessages);
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onBlur={sendMessage}
+              // onBlur={sendMessage}
               onKeyDown={handleKeyPress}
               placeholder="Написать сообщение..."
             />

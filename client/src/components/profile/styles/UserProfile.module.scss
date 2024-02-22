@@ -133,7 +133,7 @@
             width: 60px;
             border-radius: 50%;
             border: 1px solid #DFE0E7;
-            background-size: cover;
+            object-fit: cover;
         }
     
         &__body {

@@ -30,6 +30,7 @@
         perspective:  1000px;
         width: 240px;
         height: 300px;
+        cursor: pointer;
 
         &:hover {
             .step_one__front, .step_two__front, .step_three__front {

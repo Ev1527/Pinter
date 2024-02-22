@@ -15,7 +15,7 @@ export default function MapComponent({
       <Map
         state={{
           center,
-          zoom: 15,
+          zoom: 13,
           controls: [],
         }}
         width='760px'

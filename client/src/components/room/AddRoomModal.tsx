@@ -13,7 +13,7 @@ export default function AddRoomModal({
 }): JSX.Element {
   const [check, setCheck] = useState(true);
   const [title, setTitle] = useState("");
-  const [members, setMembers] = useState("2");
+  const [members, setMembers] = useState("");
   const [description, setDescription] = useState("");
   const [firstQuestion, setFirstQuestion] = useState("");
   const [secondQuestion, setSecondQuestion] = useState("");
@@ -43,6 +43,19 @@ export default function AddRoomModal({
 
   const addRoomHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    if (
+      !title ||
+      !members ||
+      !description ||
+      !firstQuestion ||
+      !secondQuestion ||
+      !thirdQuestion ||
+      !firstAnswer ||
+      !secondAnswer ||
+      !thirdAnswer
+    ) {
+      return alert("Заполните все поля");
+    }
     dispatch(
       addRoomWithTest({
         title,

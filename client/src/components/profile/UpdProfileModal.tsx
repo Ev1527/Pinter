@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './styles/UserProfile.module.scss';
 import logoSml from './styles/user_logo_sml.png';
-// import imgUpload from './styles/img_upload.png';
 import imgUpload from './styles/img_upload.svg';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { updProfile } from '../auth/authSlice';

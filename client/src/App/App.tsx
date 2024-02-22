@@ -21,8 +21,8 @@ import { allAccessTables } from "../components/room/roomSlice";
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
-  // axios.defaults.baseURL = "http://localhost:3001";
-  axios.defaults.baseURL = "https://pinter.fun";
+  axios.defaults.baseURL = "http://localhost:3001";
+  // axios.defaults.baseURL = "https://pinter.fun";
   axios.defaults.withCredentials = true;
 
   useEffect(() => {

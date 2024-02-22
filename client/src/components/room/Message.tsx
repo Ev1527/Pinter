@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles/Message.module.scss';
-import userLogo from './styles/user_message_logo.png';
+import userLogo from './styles/user_logo_chat.jpeg';
 import { IMessage } from '../chat/ChatPage';
 
 
@@ -9,12 +9,11 @@ export default function Message({ message, isCurrentUser }: { message: IMessage,
     const date = new Date(message.time_stamp);
     // Форматирование даты и времени
     const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    const userAvatar = message.user?.image || userLogo;
+    const userName = message.user?.name || 'Bobr Curva';
 
     console.log(isCurrentUser, 'isCurrentUser');
     
-    
-    const userAvatar = message.user?.image || userLogo;
-    const userName = message.user?.name || 'Bobr Curva'
 
     return (
         <div className={styles.message__container}>
