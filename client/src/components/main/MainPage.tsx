@@ -18,7 +18,7 @@ export default function MainPage(): JSX.Element {
     <>
       <div className={styles.main__container}>
         <div>
-          <h1 onClick={() => nav('/profile')}>Pinter</h1>
+          <h1>Pinter</h1>
           <p>Твое комьюнити рядом</p>
           <HashLink smooth to="#events">
             <button type='button' onClick={() => nav('/parties')}>НАЙТИ СВОИХ</button>

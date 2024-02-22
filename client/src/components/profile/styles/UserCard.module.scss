@@ -27,6 +27,7 @@
         flex-direction: column;
         gap: 20px;
         padding-right: 30px;
+
     }
 
     &__name, &__email {
@@ -42,6 +43,7 @@
         color: #7e7e7e;
         font-weight: 400;
         font-family: 'Montserrat', sans-serif;
+        background-color: transparent;
     }
     
     &__edit {
