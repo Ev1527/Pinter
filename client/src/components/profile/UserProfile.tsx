@@ -15,7 +15,7 @@ export default function UserProfile(): JSX.Element {
   //   const [userParties, setUserParties] = useState<UserPartyRoom[]>([]);
   const dispatch = useAppDispatch();
   const userParties = useAppSelector((store) => store.profile.userRooms);
-  console.log("user: ", user);
+
 
   const hide = (): void => {
     setVisible(true);
@@ -32,7 +32,6 @@ export default function UserProfile(): JSX.Element {
     // }
     // userPartyRooms();
   }, [user, dispatch]);
-  console.log(userParties);
 
   const bgDivColors = ["#3C4D34", "#422222", "#242E3C", "#3B2643", "#3E090F"];
 

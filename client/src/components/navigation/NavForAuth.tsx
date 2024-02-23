@@ -44,33 +44,28 @@ export default function NavForAuth(): JSX.Element {
 
                 {!user?.name ? (
                     <div className={styles.lk}>
-                    {/* <li className="nav__item lk">
-                        <NavLink className="nav__button" to="/auth/registration">
-                        Регистрация
-                        </NavLink>
-                    </li> */}
-                    <li className="nav__item lk">
-                        <NavLink className="nav__button" to="/auth/authorization">
-                        <span>Вход</span>
-                        </NavLink>
-                    </li>
+                        <li className="nav__item lk">
+                            <NavLink className="nav__button" to="/auth/authorization">
+                            <span>Вход</span>
+                            </NavLink>
+                        </li>
                     </div>
                 ) : (
                     <div className={styles.lk}>
-                    <li>
-                        <NavLink className="nav__button" to="/profile">
-                        Личный кабинет
-                        </NavLink>
-                    </li>
-                    <li className="nav__item lk">
-                        <button
-                        type="button"
-                        onClick={onHandleLogout}
-                        className="nav__button"
-                        >
-                        Выйти
-                        </button>
-                    </li>
+                        <li>
+                            <NavLink className="nav__button" to="/profile">
+                            Личный кабинет
+                            </NavLink>
+                        </li>
+                        <li className="nav__item lk">
+                            <button
+                            type="button"
+                            onClick={onHandleLogout}
+                            className="nav__button"
+                            >
+                            Выйти
+                            </button>
+                        </li>
                     </div>
                 )}
                 </ul>

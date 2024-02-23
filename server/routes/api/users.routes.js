@@ -59,7 +59,6 @@ router.get('/parties/:userId', async (req, res) => {
 
         res.json(userPartyRooms);
         
-
         // if (userParties && userParties.length > 0) {
         //     const partyIds = userParties.map(userParty => userParty.Room_Dialogue.party_id);
         //     const parties = await Party.findAll({ where: { id: partyIds } });

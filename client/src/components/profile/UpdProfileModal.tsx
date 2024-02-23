@@ -57,7 +57,7 @@ export default function UpdProfileModal({ hide }: { hide: () => void }): JSX.Ele
                 </div>
 
                 <div className={styles.upd_profile__body}>
-                    <div style={{ cursor: 'pointer' }}>
+                    <div>
                         <h4>Загрузить фото профиля</h4>
                         <img src={previewImage || imgUpload} alt="Upload" onClick={handleImageClick} />
                         <input
