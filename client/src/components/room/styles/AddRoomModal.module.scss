@@ -120,7 +120,7 @@
         width: 690px;
         display: flex;
         align-items: center;
-        background-color: #a8aab9;
+        background-color: #52535F;
         color: #d9d9d9 !important;
         border: none;
         border-radius: 10px;
@@ -168,8 +168,9 @@
           width: 90px;
           height: 40px;
           background-color: #424349 !important;
-          border-radius: 25px;
-          // border: 2px solid #dfe0e7;
+          // border-radius: 25px;
+          border-radius: 10px;
+          border: 2px solid #9597A5;
           color: #d9d9d9;
           font-size: 18px;
           font-family: "Montserrat", sans-serif;
@@ -225,6 +226,7 @@
 
       &:hover {
         background-color: #d9d9d9;
+        // background-color: #a8aab9;
         color: #424349;
         transition-duration: 0.5s;
         border: 2px solid #424349;

@@ -5,6 +5,8 @@ import { useAppDispatch } from "../../redux/store";
 import { authorization } from "./authSlice";
 import styles from "./styles/Auth.module.scss";
 import welcome from './styles/welcome_bg.svg';
+import NavForAuth from "../navigation/NavForAuth";
+import NavForLogin from "../navigation/NavForLogin";
 
 
 export default function Authorization(): JSX.Element {
@@ -38,7 +40,9 @@ export default function Authorization(): JSX.Element {
   };
 
   return (
-    <div className={styles.container}>
+    <>
+      <NavForLogin />
+      <div className={styles.container}>
       <form id="reg-form" onSubmit={onHandleSubmit}>
         <h2>Без вас никуда! Мы ждали</h2>
         <img src={welcome} alt="welcome" />
@@ -71,5 +75,6 @@ export default function Authorization(): JSX.Element {
         <button type="submit">Войти</button>
       </form>
     </div>
+    </>
   );
 }

@@ -7,6 +7,10 @@
   justify-content: space-between;
   align-items: self-start;
   gap: 50px;
+//   padding: 0 40px;
+
+//   margin-left: 50px;
+//   margin: 0 auto;
   
   &__info {
     position: relative;
@@ -164,15 +168,16 @@
 }
 
     .rooms__container {
-        width: auto;
+        // width: auto;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
         gap: 10px;
+        // margin: 0 20px;
 
         .item {
-            width: 200px;
+            width: 180px;
             height: 180px;
             display: flex;
             flex-direction: column;

@@ -1,12 +1,14 @@
 .container {
-    bottom: 150px;
+    position: relative;
     margin: 0 auto;
     // margin-top: 100px;
     // width: 100%;
-    width: 1440px;
-    margin-left: -50px;
+    // width: 1310px;
+    margin: 0 auto;
+    // margin-left: -85px;
 
     height: 480px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,6 +24,11 @@
     }
 
     .about {
+        margin-left: -85px;
+
+        position: absolute;
+        top: 124px;
+        left: 0;
         width: 100%;
         display: flex;
         justify-content: space-evenly;
@@ -41,7 +48,6 @@
         background-color: transparent;
         border-left: 2px solid #DFE0E7;
         align-self: center;
-
     }
 
     span {
@@ -64,6 +70,7 @@
         border: 2px solid #55565F;
         padding: 15px 70px 10px;
         margin-top: 20px;
+        margin: 0 auto;
         background-color: transparent;
         cursor: pointer;
         transition-duration: .5s;

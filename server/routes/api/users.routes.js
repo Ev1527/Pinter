@@ -87,7 +87,7 @@ router.get('/parties/:userId', async (req, res) => {
 })
 
 router.put('/profile', async (req, res) => {
-    const { id, name, email, password } = req.body.data;
+    const { id, name, image, email, password } = req.body.data;
     // console.log('========', req.body.data);
     
     try {
@@ -95,12 +95,12 @@ router.put('/profile', async (req, res) => {
         const compare = await bcrypt.compare(password, user.password);
         if (!compare) {
             const hash = await bcrypt.hash(password, 10);
-            const userUpd = await User.update({ name, email, password: hash }, { where: { id } });
+            const userUpd = await User.update({ name, email, image, password: hash }, { where: { id } });
             if (userUpd.length > 0) {
                 const user = await User.findOne({ where: { id }});
 
                 const { accessToken, refreshToken } = generateTokens({
-                    user: { id: user.id, email: user.email, name: user.name, password: user.password },
+                    user: { id: user.id, email: user.email, name: user.name, image: user.image, password: user.password },
                   });
                 res
                     .clearCookie(cookiesConfig.refresh)
@@ -119,12 +119,12 @@ router.put('/profile', async (req, res) => {
             }
 
         } else {
-            const userUpd = await User.update( { name, email }, { where: { id } });
+            const userUpd = await User.update( { name, email, image }, { where: { id } });
             if (userUpd.length > 0) {
                 const user = await User.findOne({ where: { id }});
 
                 const { accessToken, refreshToken } = generateTokens({
-                    user: { id: user.id, email: user.email, name: user.name, password: user.password },
+                    user: { id: user.id, email: user.email, name: user.name, image: user.image, password: user.password },
                   });
 
                 res

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 // import styles from './styles/Party.module.scss';
-import styles from './styles/PartiesList2.module.scss';
-import PartyItem from './PartyItem';
+import styles from './PartiesList2.module.scss';
+import PartyItem from '../PartyItem';
 import leftArr from './styles/arr_left.svg';
 import rightArr from './styles/arr_right.svg';
-import { useAppSelector } from "../../redux/store";
+import { useAppSelector } from "../../../redux/store";
 import "slick-carousel/slick/slick.css"; // добавляю плавный слайдер
 import "slick-carousel/slick/slick-theme.css"; // добавляю плавный слайдер
 import Slider from "react-slick"; // добавляю плавный слайдер
