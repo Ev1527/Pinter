@@ -27,7 +27,8 @@ export default function MainPage(): JSX.Element {
         
         <HashLink smooth to="#about">
           <div className={styles.video}>
-            <video src={video2} width={840} autoPlay muted playsInline loop />
+            <video src={video2} width={1600} height={815} autoPlay muted playsInline loop />
+            {/* <video src={video2} width={840} autoPlay muted playsInline loop /> */}
             {/* <video src={video} width={640} height={360} autoPlay muted playsInline loop /> */}
             <div className={styles.video__overlay}></div>
           </div>

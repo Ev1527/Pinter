@@ -34,13 +34,13 @@ function App(): JSX.Element {
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>
-        <Route path="/auth/registration" element={<Registration />} />
-        <Route path="/auth/authorization" element={<Authorization />} />
         <Route index element={<MainPage />} />
         <Route path="/parties" element={<PartiesList />} />
         <Route path="/steps" element={<ThreeSteps />} />
         <Route path="/contacts" element={<Map />} />
       </Route>
+      <Route path="/auth/registration" element={<Registration />} />
+      <Route path="/auth/authorization" element={<Authorization />} />
       <Route path="/profile" element={<UserProfile />} />
       <Route path="/parties/:partyId" element={<PartyPage />} />
       <Route path="/room" element={<RoomPage />} />

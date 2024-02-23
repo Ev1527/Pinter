@@ -12,14 +12,38 @@ export default function UpdProfileModal({ hide }: { hide: () => void }): JSX.Ele
     const [name, setName] = useState(user?.name || "");
     const [email, setEmail] = useState(user?.email ||"");
     const [password, setPassword] = useState(user?.password || "");
+    const [previewImage, setPreviewImage] = useState(user?.image || imgUpload); // Предпросмотр изображения
     const dispatch = useAppDispatch();
+
+    const fileInputRef = React.useRef<HTMLInputElement>(null);
 
 
     const changeProfileHandler = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        dispatch(updProfile({ id: user?.id, name, email, password, image: userProfileImg }));
+        dispatch(updProfile({ id: user?.id, name, email, password, image: previewImage }));
         hide();
     }
+    // console.log(previewImage);
+    
+    const handleImageClick = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                setPreviewImage(reader.result as string);
+                // Здесь вы можете также отправить файл на сервер
+            };
+
+            reader.readAsDataURL(file);
+        }
+    };
 
     return (
         <div className={styles.modal}>
@@ -33,9 +57,15 @@ export default function UpdProfileModal({ hide }: { hide: () => void }): JSX.Ele
                 </div>
 
                 <div className={styles.upd_profile__body}>
-                    <div>
+                    <div style={{ cursor: 'pointer' }}>
                         <h4>Загрузить фото профиля</h4>
-                        <img src={imgUpload} alt="" />
+                        <img src={previewImage || imgUpload} alt="Upload" onClick={handleImageClick} />
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            style={{ display: 'none', cursor: 'pointer' }}
+                            onChange={handleImageChange}
+                        />
                     </div>
 
                     <form onSubmit={changeProfileHandler}>

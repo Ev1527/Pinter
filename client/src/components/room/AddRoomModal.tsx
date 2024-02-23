@@ -93,7 +93,7 @@ export default function AddRoomModal({
               onChange={(e) => setMembers(e.target.value)}
               value={members}
               type="number"
-              placeholder="Количество людей"
+              placeholder="Укажите количество участников"
               required
             />
             <input
