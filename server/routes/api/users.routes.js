@@ -92,15 +92,15 @@ router.put('/profile', async (req, res) => {
     
     try {
         const user = await User.findOne ({ where: { id } });
-        const compare = await bcrypt.compare(password, user.password);
-        if (!compare) {
+        // const compare = await bcrypt.compare(password, user.password);
+        if (!password !== "") {
             const hash = await bcrypt.hash(password, 10);
             const userUpd = await User.update({ name, email, image, password: hash }, { where: { id } });
             if (userUpd.length > 0) {
                 const user = await User.findOne({ where: { id }});
 
                 const { accessToken, refreshToken } = generateTokens({
-                    user: { id: user.id, email: user.email, name: user.name, image: user.image, password: user.password },
+                    user: { id: user.id, email: user.email, name: user.name, password: user.password },
                   });
                 res
                     .clearCookie(cookiesConfig.refresh)
@@ -124,7 +124,7 @@ router.put('/profile', async (req, res) => {
                 const user = await User.findOne({ where: { id }});
 
                 const { accessToken, refreshToken } = generateTokens({
-                    user: { id: user.id, email: user.email, name: user.name, image: user.image, password: user.password },
+                    user: { id: user.id, email: user.email, name: user.name, password: user.password },
                   });
 
                 res

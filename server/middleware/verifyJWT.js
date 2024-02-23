@@ -18,7 +18,7 @@ function verifyRefreshToken(req, res, next) {
     const { refresh } = req.cookies;
     const { user } = jwt.verify(refresh, process.env.REFRESH_TOKEN_SECRET);
     const { accessToken, refreshToken } = generateTokens({
-      user: { id: user.id, email: user.email, name: user.name, password: user.password, image: user.image },
+      user: { id: user.id, email: user.email, name: user.name, password: user.password },
     });
 
     res.locals.user = user;

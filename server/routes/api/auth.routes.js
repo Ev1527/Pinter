@@ -35,7 +35,7 @@ router.post("/sign-up", async (req, res) => {
           email: userInDb.email,
           name: userInDb.name,
           password: userInDb.password,
-          image: userInDb.image,
+          // image: userInDb.image,
         },
       });
 
@@ -82,7 +82,7 @@ router.post("/sign-in", async (req, res) => {
         email: userInDb.email,
         name: userInDb.name,
         password: userInDb.password,
-        image: userInDb.image,
+        // image: userInDb.image,
       },
     });
     // await Party.create({
@@ -128,11 +128,11 @@ router.get("/check", async (req, res) => {
     if (user && userInDb) {
       res.status(200).json({
         user: {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          password: user.password,
-          image: user.image,
+          id: userInDb.id,
+          email: userInDb.email,
+          name: userInDb.name,
+          password: userInDb.password,
+          image: userInDb.image,
         },
       });
     } else {
