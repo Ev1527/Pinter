@@ -23,7 +23,7 @@ export default function UpdProfileModal({ hide }: { hide: () => void }): JSX.Ele
         dispatch(updProfile({ id: user?.id, name, email, password, image: previewImage }));
         hide();
     }
-    console.log(previewImage);
+    // console.log(previewImage);
     
     const handleImageClick = () => {
         if (fileInputRef.current) {
