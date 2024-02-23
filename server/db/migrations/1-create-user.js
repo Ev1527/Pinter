@@ -27,7 +27,7 @@ module.exports = {
       },
       image: {
         defaultValue:
-          "https://www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg",
+          "https://png.pngtree.com/thumb_back/fh260/background/20230612/pngtree-in-the-style-of-2d-game-art-image_2884743.jpg",
         type: Sequelize.TEXT,
       },
       createdAt: {
