@@ -11,7 +11,7 @@ export default function UpdProfileModal({ hide }: { hide: () => void }): JSX.Ele
     
     const [name, setName] = useState(user?.name || "");
     const [email, setEmail] = useState(user?.email ||"");
-    const [password, setPassword] = useState(user?.password || "");
+    const [password, setPassword] = useState("");
     const [previewImage, setPreviewImage] = useState(user?.image || imgUpload); // Предпросмотр изображения
     const dispatch = useAppDispatch();
 

@@ -93,7 +93,7 @@ router.put('/profile', async (req, res) => {
     try {
         const user = await User.findOne ({ where: { id } });
         // const compare = await bcrypt.compare(password, user.password);
-        if (!password !== "") {
+        if (password !== "") {
             const hash = await bcrypt.hash(password, 10);
             const userUpd = await User.update({ name, email, image, password: hash }, { where: { id } });
             if (userUpd.length > 0) {

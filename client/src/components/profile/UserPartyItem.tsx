@@ -17,7 +17,7 @@ export default function UserPartyItem({
   const partyImage = room.Party.image || partyImg;
   const nav = useNavigate();
   const dispatch = useAppDispatch();
-  console.log("room: ", room);
+//   console.log("room: ", room);
 
   const deleteRoomHandler = () => {
     // const { data } = await axios.delete(`api/users/room/${room.id}`);
