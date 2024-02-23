@@ -5,7 +5,6 @@ import { useAppDispatch } from "../../redux/store";
 import { authorization } from "./authSlice";
 import styles from "./styles/Auth.module.scss";
 import welcome from './styles/welcome_bg.svg';
-import NavForAuth from "../navigation/NavForAuth";
 import NavForLogin from "../navigation/NavForLogin";
 
 
